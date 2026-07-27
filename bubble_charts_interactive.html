@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shops vs Dmarts Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #0b0b0b;
+            margin-bottom: 10px;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .chart-container h2 {
+            font-size: 18px;
+            color: #0b0b0b;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 450px;
+            margin-bottom: 15px;
+        }
+        .legend {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 13px;
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid;
+        }
+        .legend-text {
+            color: #52514e;
+            font-size: 13px;
+        }
+        .outlier .legend-dot {
+            background: rgba(139, 139, 139, 0.5);
+            border-color: #555;
+        }
+        .critical .legend-dot {
+            background: rgba(74, 144, 226, 0.5);
+            border-color: #2a5cdb;
+        }
+        .other .legend-dot {
+            background: rgba(227, 73, 72, 0.3);
+            border-color: #e34948;
+        }
+        @media (max-width: 1024px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Market Performance Analysis: Shops vs Dmarts</h1>
+            <p style="color: #52514e; font-size: 14px;">Interactive bubble charts showing % Above Range vs EPT Error</p>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h2>Shops (62 markets)</h2>
+                <div class="chart-wrapper">
+                    <canvas id="shopsChart"></canvas>
+                </div>
+                <div class="legend">
+                    <div class="legend-item outlier">
+                        <span class="legend-dot"></span>
+                        <span class="legend-text">Taiwan — outlier (110.0 score)</span>
+                    </div>
+                    <div class="legend-item critical">
+                        <span class="legend-dot"></span>
+                        <span class="legend-text">Critical tier — top 5 problem markets</span>
+                    </div>
+                    <div class="legend-item other">
+                        <span class="legend-dot"></span>
+                        <span class="legend-text">All other markets</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h2>Dmarts (47 markets)</h2>
+                <div class="chart-wrapper">
+                    <canvas id="dmartsChart"></canvas>
+                </div>
+                <div class="legend">
+                    <div class="legend-item outlier">
+                        <span class="legend-dot"></span>
+                        <span class="legend-text">T5 (Turkey) — outlier (155.6 score)</span>
+                    </div>
+                    <div class="legend-item critical">
+                        <span class="legend-dot"></span>
+                        <span class="legend-text">Critical tier — top 5 problem markets</span>
+                    </div>
+                    <div class="legend-item other">
+                        <span class="legend-dot"></span>
+                        <span class="legend-text">All other markets</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const shopsAllData = [
+            { country: 'Taiwan (tw)', above: 37.03, ept: 1.62, volume: 493197, group: 'taiwan' },
+            { country: 'Portugal (gv-pt)', above: 33.85, ept: 3.11, volume: 279314, group: 'critical' },
+            { country: 'Romania (gv-ro)', above: 29.23, ept: 2.59, volume: 458048, group: 'critical' },
+            { country: 'Spain (gv-es)', above: 25.06, ept: 3.74, volume: 743336, group: 'critical' },
+            { country: 'Saudi Arabia (sa)', above: 24.08, ept: 3.74, volume: 1160491, group: 'critical' },
+            { country: 'Bangladesh (bd)', above: 31.28, ept: 3.11, volume: 75569, group: 'critical' },
+            { country: 'Poland (gv-pl)', above: 27.38, ept: 2.11, volume: 433043, group: 'other' },
+            { country: 'Ivory Coast (gv-ci)', above: 28.95, ept: 4.39, volume: 58049, group: 'other' },
+            { country: 'Pakistan (pk)', above: 25.27, ept: 2.00, volume: 587475, group: 'other' },
+            { country: 'Armenia (gv-am)', above: 32.19, ept: 3.28, volume: 24801, group: 'other' },
+            { country: 'Singapore (sg)', above: 28.34, ept: 1.92, volume: 130097, group: 'other' },
+            { country: 'Greece (gr)', above: 26.79, ept: 1.02, volume: 263828, group: 'other' },
+            { country: 'Hungary (hu)', above: 27.57, ept: 3.20, volume: 76110, group: 'other' },
+            { country: 'Malaysia (my)', above: 26.84, ept: 1.46, volume: 152976, group: 'other' },
+            { country: 'Nigeria (gv-ng)', above: 26.92, ept: 5.01, volume: 38773, group: 'other' },
+            { country: 'Chile (cl)', above: 27.14, ept: 1.04, volume: 152167, group: 'other' },
+            { country: 'Sweden (se)', above: 28.02, ept: 1.34, volume: 57787, group: 'other' },
+            { country: 'Italy (gv-it)', above: 24.20, ept: 1.82, volume: 238216, group: 'other' },
+            { country: 'Philippines (ph)', above: 23.98, ept: 2.88, volume: 159314, group: 'other' },
+            { country: 'Turkey (t3)', above: 21.64, ept: 1.41, volume: 859742, group: 'other' },
+            { country: 'Norway (no)', above: 29.29, ept: 0.91, volume: 29081, group: 'other' },
+            { country: 'Kenya (gv-ke)', above: 21.07, ept: 4.89, volume: 103405, group: 'other' },
+            { country: 'Argentina (ar)', above: 20.23, ept: 1.15, volume: 1226517, group: 'other' },
+            { country: 'Venezuela (ve)', above: 27.36, ept: 2.20, volume: 23889, group: 'other' },
+            { country: 'Uganda (gv-ug)', above: 25.98, ept: 2.74, volume: 30039, group: 'other' },
+            { country: 'Czech Republic (cz)', above: 25.25, ept: 1.51, volume: 63313, group: 'other' },
+            { country: 'UAE (ae)', above: 18.80, ept: 1.62, volume: 1905161, group: 'other' },
+            { country: 'Guatemala (gt)', above: 23.71, ept: 2.25, volume: 79141, group: 'other' },
+            { country: 'Ukraine (gv-ua)', above: 20.02, ept: 2.57, volume: 411841, group: 'other' },
+            { country: 'Georgia (gv-ge)', above: 22.16, ept: 1.57, volume: 197262, group: 'other' },
+            { country: 'Moldova (gv-md)', above: 27.64, ept: 1.88, volume: 15773, group: 'other' },
+            { country: 'Serbia (gv-rs)', above: 23.77, ept: 2.24, volume: 52947, group: 'other' },
+            { country: 'Uruguay (uy)', above: 21.80, ept: 1.48, volume: 160591, group: 'other' },
+            { country: 'Oman (om)', above: 18.92, ept: 2.73, volume: 293717, group: 'other' },
+            { country: 'Myanmar (mm)', above: 26.18, ept: 1.19, volume: 19609, group: 'other' },
+            { country: 'Panama (pa)', above: 20.05, ept: 3.17, volume: 101255, group: 'other' },
+            { country: 'Jordan (jo)', above: 18.50, ept: 2.32, volume: 334196, group: 'other' },
+            { country: 'Honduras (hn)', above: 21.06, ept: 2.06, volume: 71778, group: 'other' },
+            { country: 'Morocco (gv-ma)', above: 16.90, ept: 2.29, volume: 620313, group: 'other' },
+            { country: 'Bosnia (gv-ba)', above: 35.27, ept: 2.10, volume: 947, group: 'other' },
+            { country: 'Montenegro (gv-me)', above: 24.44, ept: 2.55, volume: 12115, group: 'other' },
+            { country: 'Nicaragua (ni)', above: 19.91, ept: 1.95, volume: 94690, group: 'other' },
+            { country: 'Hong Kong (hk)', above: 21.04, ept: 0.98, volume: 80308, group: 'other' },
+            { country: 'Egypt (eg)', above: 15.40, ept: 2.14, volume: 1379088, group: 'other' },
+            { country: 'Bolivia (bo)', above: 20.91, ept: 1.41, volume: 65553, group: 'other' },
+            { country: 'Peru (pe)', above: 20.56, ept: 1.41, volume: 76468, group: 'other' },
+            { country: 'Croatia (gv-hr)', above: 22.57, ept: 1.46, volume: 25850, group: 'other' },
+            { country: 'Kuwait (kw)', above: 14.71, ept: 2.76, volume: 987289, group: 'other' },
+            { country: 'El Salvador (sv)', above: 20.10, ept: 1.20, volume: 70116, group: 'other' },
+            { country: 'Kazakhstan (gv-kz)', above: 18.82, ept: 2.28, volume: 45251, group: 'other' },
+            { country: 'Cambodia (kh)', above: 18.43, ept: 3.30, volume: 30743, group: 'other' },
+            { country: 'Qatar (qa)', above: 15.11, ept: 1.84, volume: 465997, group: 'other' },
+            { country: 'Paraguay (py)', above: 18.47, ept: 2.16, volume: 35236, group: 'other' },
+            { country: 'Cyprus (cy)', above: 18.39, ept: 1.15, volume: 60453, group: 'other' },
+            { country: 'Laos (la)', above: 21.59, ept: 1.30, volume: 9663, group: 'other' },
+            { country: 'Ecuador (ec)', above: 16.28, ept: 1.84, volume: 104988, group: 'other' },
+            { country: 'Dominican Republic (do)', above: 15.43, ept: 1.67, volume: 187606, group: 'other' },
+            { country: 'Tunisia (gv-tn)', above: 16.22, ept: 2.64, volume: 58213, group: 'other' },
+            { country: 'Bahrain (bh)', above: 14.66, ept: 1.88, volume: 263035, group: 'other' },
+            { country: 'Kyrgyzstan (gv-kg)', above: 17.54, ept: 3.56, volume: 16781, group: 'other' },
+            { country: 'Costa Rica (cr)', above: 17.96, ept: 2.08, volume: 27237, group: 'other' },
+            { country: 'Iraq (iq)', above: 11.97, ept: 3.33, volume: 45732, group: 'other' }
+        ];
+
+        const dmartsAllData = [
+            { code: 't5', above: 54.16, ept: -3.12, volume: 270955, group: 'taiwan' },
+            { code: 'hu', above: 38.56, ept: -0.73, volume: 172825, group: 'critical' },
+            { code: 'ph', above: 27.7, ept: -4.75, volume: 1061588, group: 'critical' },
+            { code: 'qa', above: 30.77, ept: -0.77, volume: 1157790, group: 'critical' },
+            { code: 'bd', above: 32.61, ept: 0.12, volume: 316431, group: 'critical' },
+            { code: 'my', above: 35.16, ept: -2.99, volume: 43717, group: 'critical' },
+            { code: 'gv-es', above: 34.02, ept: 0.58, volume: 108903, group: 'other' },
+            { code: 'sg', above: 33.5, ept: -1.9, volume: 69802, group: 'other' },
+            { code: 'pk', above: 29.26, ept: -3.36, volume: 106856, group: 'other' },
+            { code: 'se', above: 30.04, ept: -1.05, volume: 148800, group: 'other' },
+            { code: 'hk', above: 29.16, ept: -6.04, volume: 35178, group: 'other' },
+            { code: 't3', above: 27.75, ept: -3.44, volume: 117697, group: 'other' },
+            { code: 'eg', above: 24.88, ept: -3.17, volume: 146525, group: 'other' },
+            { code: 'no', above: 26.26, ept: 0.01, volume: 245994, group: 'other' },
+            { code: 'gv-ke', above: 30.03, ept: 1.91, volume: 24957, group: 'other' },
+            { code: 'gr', above: 19.42, ept: -3.17, volume: 263828, group: 'other' },
+            { code: 'cl', above: 21.46, ept: -1.35, volume: 334593, group: 'other' },
+            { code: 'gv-it', above: 24.55, ept: 0.58, volume: 108903, group: 'other' },
+            { code: 'ar', above: 15.75, ept: -3.75, volume: 2219686, group: 'other' },
+            { code: 'ae', above: 15.23, ept: 0.30, volume: 1613497, group: 'other' },
+            { code: 'bh', above: 20.67, ept: 0.12, volume: 316431, group: 'other' },
+            { code: 'do', above: 10.5, ept: -2.69, volume: 132362, group: 'other' },
+            { code: 'ec', above: 12.75, ept: -2.41, volume: 82201, group: 'other' },
+            { code: 'kr2', above: 18.83, ept: -2.64, volume: 4387525, group: 'other' },
+            { code: 'gt', above: 13.74, ept: -3.30, volume: 78545, group: 'other' },
+            { code: 'gv-ci', above: 28.36, ept: 0.49, volume: 28741, group: 'other' },
+            { code: 'gv-ma', above: 9.88, ept: 0.89, volume: 28741, group: 'other' },
+            { code: 'gv-ua', above: 19.04, ept: 1.27, volume: 123456, group: 'other' },
+            { code: 'gv-ba', above: 16.43, ept: -2.47, volume: 28741, group: 'other' },
+            { code: 'gv-kg', above: 21.9, ept: 1.91, volume: 24957, group: 'other' },
+            { code: 'gv-kz', above: 8.12, ept: -0.28, volume: 15209, group: 'other' },
+            { code: 'gv-rs', above: 11.72, ept: -0.68, volume: 28741, group: 'other' },
+            { code: 'gv-am', above: 21.59, ept: -1.79, volume: 28741, group: 'other' },
+            { code: 'gv-md', above: 9.05, ept: -0.45, volume: 28741, group: 'other' },
+            { code: 'gv-ge', above: 17.48, ept: -1.38, volume: 28741, group: 'other' },
+            { code: 'cz', above: 30.76, ept: -1.83, volume: 26958, group: 'other' },
+            { code: 'bo', above: 14.43, ept: -4.69, volume: 116090, group: 'other' },
+            { code: 'pa', above: 16.86, ept: -0.51, volume: 123456, group: 'other' },
+            { code: 'pe', above: 13.97, ept: -1.44, volume: 123456, group: 'other' },
+            { code: 'uy', above: 12.16, ept: -1.72, volume: 123456, group: 'other' },
+            { code: 'ni', above: 11.74, ept: -2.06, volume: 123456, group: 'other' },
+            { code: 'hn', above: 11.75, ept: -1.01, volume: 123456, group: 'other' },
+            { code: 'cr', above: 9.66, ept: -1.45, volume: 123456, group: 'other' },
+            { code: 'sv', above: 13.21, ept: -2.89, volume: 123456, group: 'other' },
+            { code: 've', above: 8.94, ept: -0.32, volume: 123456, group: 'other' },
+            { code: 'de2', above: 23.14, ept: -7.21, volume: 121, group: 'other' }
+        ];
+
+        function createChart(canvasId, allData, xMax, yMin, yMax) {
+            const taiwanData = allData.filter(d => d.group === 'taiwan');
+            const criticalData = allData.filter(d => d.group === 'critical');
+            const otherData = allData.filter(d => d.group === 'other');
+
+            new Chart(document.getElementById(canvasId), {
+                type: 'bubble',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Outlier',
+                            data: taiwanData.map(d => ({ x: Math.round(d.above * 100) / 100, y: Math.round(d.ept * 100) / 100, r: Math.sqrt(d.volume / 1500) })),
+                            backgroundColor: 'rgba(139, 139, 139, 0.5)',
+                            borderColor: '#555',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Critical',
+                            data: criticalData.map(d => ({ x: Math.round(d.above * 100) / 100, y: Math.round(d.ept * 100) / 100, r: Math.sqrt(d.volume / 1500) })),
+                            backgroundColor: 'rgba(74, 144, 226, 0.5)',
+                            borderColor: '#2a5cdb',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Other',
+                            data: otherData.map(d => ({ x: Math.round(d.above * 100) / 100, y: Math.round(d.ept * 100) / 100, r: Math.sqrt(d.volume / 1500) })),
+                            backgroundColor: 'rgba(227, 73, 72, 0.3)',
+                            borderColor: '#e34948',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { title: () => '', label: (ctx) => ctx.raw.x.toFixed(1) + '% above, ' + ctx.raw.y.toFixed(2) + 'h error' } }
+                    },
+                    scales: {
+                        x: { title: { display: true, text: '% Above range', font: { size: 12 } }, min: 0, max: xMax },
+                        y: { title: { display: true, text: 'EPT error (hours)', font: { size: 12 } }, min: yMin, max: yMax }
+                    },
+                    layout: { padding: 20 }
+                }
+            });
+        }
+
+        createChart('shopsChart', shopsAllData, 40, 0, 5.5);
+        createChart('dmartsChart', dmartsAllData, 60, -8, 3);
+    </script>
+</body>
+</html>
