@@ -1,0 +1,19 @@
+groceries_bubble_chart.html
+  s_b5ac0f70054782::t_d6acc3cfe86643 1-386
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "789d605fcb3e1a30a52d9ddd19c033c2da42e887",
+  "prompts": {},
+  "sessions": {
+    "s_b5ac0f70054782": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b372ceea-f9e4-426b-84dc-0c5591dbcbc9",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "human_author": "Harnoor Chahal <harnoor.chahal@deliveryhero.com>"
+    }
+  }
+}
