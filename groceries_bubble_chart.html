@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groceries Large Basket Performance Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .legend-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red {
+            background: #ef4444;
+        }
+
+        .dot-blue {
+            background: #3b82f6;
+        }
+
+        .dot-grey {
+            background: #9ca3af;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 15px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 500px;
+        }
+
+        .worst-markets {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .worst-markets h2 {
+            font-size: 18px;
+            color: #1a202c;
+            margin-bottom: 20px;
+        }
+
+        .market-row {
+            display: grid;
+            grid-template-columns: 60px 1fr 120px 120px 120px;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .market-row:last-child {
+            border-bottom: none;
+        }
+
+        .market-row.header {
+            font-weight: 600;
+            color: #4a5568;
+            background: #f7fafc;
+            padding: 15px 0;
+            margin-bottom: 10px;
+        }
+
+        .rank {
+            font-weight: 600;
+            color: #e53e3e;
+            text-align: center;
+        }
+
+        .country {
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .metric {
+            text-align: right;
+            color: #4a5568;
+        }
+
+        .metric-bad {
+            color: #e53e3e;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .legend-info {
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .market-row {
+                grid-template-columns: 50px 1fr;
+                gap: 10px;
+            }
+
+            .metric {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛒 Groceries Large Basket Performance</h1>
+            <p class="subtitle">Analysis of worst-performing markets by EPT Error and Lateness</p>
+            <div class="legend-info">
+                <div class="legend-item">
+                    <div class="legend-dot dot-red"></div>
+                    <span>Worst Performers (Top 5 Critical)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot dot-blue"></div>
+                    <span>High Priority Issues</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-dot dot-grey"></div>
+                    <span>Other Markets</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <div class="chart-title">Lateness vs EPT Error (Bubble Chart)</div>
+                <div class="chart-container">
+                    <canvas id="bubbleChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-title">Score Distribution (Scatter Plot)</div>
+                <div class="chart-container">
+                    <canvas id="scatterChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="worst-markets">
+            <h2>🔴 Top 15 Worst Performers</h2>
+            <div class="market-row header">
+                <div class="rank">Rank</div>
+                <div class="country">Market</div>
+                <div class="metric">Score</div>
+                <div class="metric">Lateness</div>
+                <div class="metric">EPT Error</div>
+            </div>
+            <div id="worstTable"></div>
+        </div>
+    </div>
+
+    <script>
+        const data = [
+            { country: "t5", orders: 20136, ept_error: 1.37, lateness: 60.2, composite_score: 49.26 },
+            { country: "pk", orders: 291473, ept_error: 7.03, lateness: 31.9, composite_score: 36.98 },
+            { country: "hu", orders: 19812, ept_error: 2.65, lateness: 42.02, composite_score: 35.74 },
+            { country: "my", orders: 20621, ept_error: 1.46, lateness: 40.1, composite_score: 33.25 },
+            { country: "bd", orders: 60120, ept_error: 4.63, lateness: 34.4, composite_score: 31.22 },
+            { country: "t3", orders: 224516, ept_error: 1.53, lateness: 29.9, composite_score: 29.86 },
+            { country: "sg", orders: 36187, ept_error: 2.97, lateness: 33.73, composite_score: 29.36 },
+            { country: "gv-es", orders: 24066, ept_error: 0.38, lateness: 36.09, composite_score: 29.18 },
+            { country: "cz", orders: 15421, ept_error: 2.15, lateness: 33.19, composite_score: 28.27 },
+            { country: "sa", orders: 174812, ept_error: 1.36, lateness: 27.5, composite_score: 27.42 },
+            { country: "se", orders: 36650, ept_error: 3.09, lateness: 30.46, composite_score: 26.84 },
+            { country: "ph", orders: 34497, ept_error: 2.98, lateness: 30.47, composite_score: 26.76 },
+            { country: "hk", orders: 52771, ept_error: 4.48, lateness: 27.73, composite_score: 25.77 },
+            { country: "uy", orders: 31455, ept_error: 4.05, lateness: 27.78, composite_score: 25.46 },
+            { country: "eg", orders: 730763, ept_error: 0.33, lateness: 26.4, composite_score: 25.39 },
+        ];
+
+        const getColor = (score, index) => {
+            if (index < 5) return '#ef4444'; // Red - top 5 worst
+            if (score > 25) return '#3b82f6'; // Blue - high priority
+            return '#9ca3af'; // Grey - other markets
+        };
+
+        const getBubbleSize = (orders) => {
+            return Math.sqrt(orders / 1000) + 5;
+        };
+
+        // Bubble Chart
+        const bubbleCtx = document.getElementById('bubbleChart').getContext('2d');
+        const bubbleChartInstance = new Chart(bubbleCtx, {
+            type: 'bubble',
+            data: {
+                datasets: data.map((d, idx) => ({
+                    label: d.country.toUpperCase(),
+                    data: [{ x: d.lateness, y: d.ept_error, r: getBubbleSize(d.orders) }],
+                    backgroundColor: getColor(d.composite_score, idx),
+                    borderColor: getColor(d.composite_score, idx),
+                    borderWidth: 1,
+                    opacity: 0.7
+                }))
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const datapoint = context.raw;
+                                const item = data[context.datasetIndex];
+                                return [
+                                    `Market: ${item.country.toUpperCase()}`,
+                                    `Lateness: ${datapoint.x.toFixed(2)}%`,
+                                    `EPT Error: ${datapoint.y.toFixed(2)}h`,
+                                    `Orders: ${item.orders.toLocaleString()}`,
+                                    `Score: ${item.composite_score.toFixed(2)}`
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Lateness (%)', font: { weight: 'bold' } },
+                        min: 5,
+                        max: 65
+                    },
+                    y: {
+                        title: { display: true, text: 'EPT Error (hours)', font: { weight: 'bold' } },
+                        min: 0,
+                        max: 8
+                    }
+                }
+            }
+        });
+
+        // Scatter Chart (Score vs Volume)
+        const scatterCtx = document.getElementById('scatterChart').getContext('2d');
+        const scatterChartInstance = new Chart(scatterCtx, {
+            type: 'scatter',
+            data: {
+                datasets: data.map((d, idx) => ({
+                    label: d.country.toUpperCase(),
+                    data: [{ x: Math.log10(d.orders), y: d.composite_score }],
+                    backgroundColor: getColor(d.composite_score, idx),
+                    borderColor: getColor(d.composite_score, idx),
+                    borderWidth: 1,
+                    pointRadius: 6
+                }))
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const datapoint = context.raw;
+                                const item = data[context.datasetIndex];
+                                return [
+                                    `Market: ${item.country.toUpperCase()}`,
+                                    `Score: ${item.composite_score.toFixed(2)}`,
+                                    `Orders: ${item.orders.toLocaleString()}`
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Order Volume (log10)', font: { weight: 'bold' } },
+                        min: 2.5,
+                        max: 6
+                    },
+                    y: {
+                        title: { display: true, text: 'Composite Score', font: { weight: 'bold' } },
+                        min: 0,
+                        max: 52
+                    }
+                }
+            }
+        });
+
+        // Populate worst markets table
+        const tableHtml = data.slice(0, 15).map((d, idx) => `
+            <div class="market-row">
+                <div class="rank">${idx + 1}</div>
+                <div class="country">${d.country.toUpperCase()}</div>
+                <div class="metric metric-bad">${d.composite_score.toFixed(2)}</div>
+                <div class="metric">${d.lateness.toFixed(2)}%</div>
+                <div class="metric">${d.ept_error.toFixed(2)}h</div>
+            </div>
+        `).join('');
+        document.getElementById('worstTable').innerHTML = tableHtml;
+    </script>
+</body>
+</html>
