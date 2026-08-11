@@ -1,0 +1,38 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# DART configuration (example)
+#
+# The DART skill's setup wizard writes a real `dart.config.yaml` next to this
+# file. You can also copy this file to `dart.config.yaml` and edit it by hand.
+# The run path reads `dart.config.yaml` (NOT this example).
+# ─────────────────────────────────────────────────────────────────────────────
+
+# 1) KPIs — which Table-1 primary KPIs to compute, flag, and render.
+#    Pick any subset of the four. Order here does not matter; the report renders
+#    them in the canonical order (pet, on_time, on_time_stacked, dt45).
+#      pet             → PET (Pickup Efficiency Time)                 threshold |Δ| ≥ 0.3 min
+#      on_time         → %on-time (±10 min)                           threshold |Δ| ≥ 1.0 pp
+#      on_time_stacked → %on-time for stacked orders                  threshold |Δ| ≥ 1.5 pp
+#      dt45            → %orders delivered in over 45 min [DT>45], ALL verticals threshold |Δ| ≥ 1.0 pp
+kpis: [pet, on_time, on_time_stacked, dt45]
+
+# 2) Frequency — the reporting cadence / comparison grain.
+#      daily   → last complete day vs prior day;   trend over last 4 days;   label = YYYY-MM-DD
+#      weekly  → last complete ISO week vs prior;   trend over last 4 weeks;  label = YYYYWww
+#      monthly → last complete month vs prior month; trend over last 4 months; label = YYYY-MM
+frequency: weekly
+
+# 3) Audience — where the finished report is delivered (Slack).
+#    Provide Slack user IDs for DMs (yourself and/or others) and/or channel IDs.
+#    Find a user ID via the Slack profile ("Copy member ID"); channel IDs start with C/G.
+#    Leave a list empty to skip that delivery path. At least one target is required.
+audience:
+  slack_user_ids: ["U036E4LSTCP"]      # DMs — self + others (e.g. add "U4QNW0MJ7")
+  slack_channel_ids: []                 # channels — e.g. ["C051L8NRY69"]
+  # email: []                           # FUTURE — not wired in v2 (needs an SMTP/email API + secret)
+
+# autonomous — when true, deliver without asking for confirmation (use for headless /
+#   scheduled runs). When false (default), the skill previews the report and asks before sending.
+autonomous: false
+
+# report_dir — where the rendered report .md is saved before delivery.
+report_dir: "/Users/harnoor.chahal/ai/seamless-reports"

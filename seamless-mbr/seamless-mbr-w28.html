@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280, initial-scale=1">
+<title>MBR Seamless — 2026 W28 · Q2 Review</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reset.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  --bg:#ffffff; --text:#343b46; --muted:#83828a;
+  --primary:#d61f26; --secondary:#343b46; --accent:#df1067; --grid:#e6e6ea;
+  --green:#2eaf6d; --amber:#c88a00;
+}
+.reveal,.reveal .slides{background:var(--bg);color:var(--text);font-family:Outfit,Arial,sans-serif;}
+.reveal .slides>section{padding:40px 52px;text-align:left;height:100%;display:flex;flex-direction:column;justify-content:flex-start;}
+.reveal h1,.reveal h2,.reveal h3{font-family:Outfit,Arial,sans-serif;font-weight:700;color:var(--text);text-transform:none;letter-spacing:0;}
+.reveal h1{font-size:32px;line-height:1.08;margin:0 0 2px;}
+.reveal h2{font-size:22px;line-height:1.2;margin:0 0 12px;}
+.reveal p,.reveal li{font-size:19px;line-height:1.4;color:var(--text);}
+
+.eyebrow{font-size:12px;color:var(--primary);letter-spacing:.09em;text-transform:uppercase;font-weight:600;margin-bottom:6px;}
+.tgt{font-size:15px;color:var(--muted);font-weight:600;margin:2px 0 0;}
+.crux{font-size:21px;line-height:1.25;color:var(--primary);font-weight:600;margin:6px 0 12px;}
+
+/* Title */
+.slide-title{justify-content:center;}
+.slide-title h1{font-size:60px;color:var(--text);}
+.slide-title .accent-bar{width:96px;height:6px;background:var(--primary);margin:18px 0 22px;}
+.slide-title .meta{font-size:18px;color:var(--muted);}
+
+/* left/right KPI body */
+.kpi-body{display:flex;gap:20px;margin-top:6px;flex:1;min-height:0;}
+.kpi-left{flex:1.35;}
+.kpi-right{flex:1;display:flex;flex-direction:column;gap:9px;}
+
+/* cards */
+.card{padding:10px 13px;background:#fafafb;box-shadow:0 1px 0 var(--grid);}
+.hl-card{border-left:5px solid var(--green);background:#f2faf5;}
+.ll-card{border-left:5px solid var(--primary);background:#fdf2f3;}
+.cx-card{border-left:5px solid var(--secondary);background:#f5f6f7;}
+.card h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 6px;color:var(--muted);}
+.card ul{margin:0;padding-left:16px;}
+.card li{font-size:13px;line-height:1.32;margin-bottom:5px;}
+.card li:last-child{margin-bottom:0;}
+
+/* two-col (exec H/L on scorecard) */
+.two-col{display:flex;gap:20px;margin-top:12px;}
+.two-col .col{flex:1;}
+
+/* tables */
+.data-table{width:100%;border-collapse:collapse;margin-top:4px;font-size:14px;}
+.data-table th,.data-table td{padding:6px 9px;text-align:left;border-bottom:1px solid var(--grid);}
+.data-table th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.03em;}
+.data-table tbody tr:nth-child(even){background:rgba(0,0,0,.02);}
+.data-table td.num{text-align:right;font-variant-numeric:tabular-nums;}
+.data-table tr.lead-up td{background:#eef9f2;}
+.data-table tr.lead-down td{background:#fdeff0;}
+.scorecard{font-size:13px;}
+.scorecard th,.scorecard td{padding:6px 8px;}
+.v-red{color:var(--primary);font-weight:600;}
+.v-amber{color:var(--amber);font-weight:600;}
+.v-green{color:var(--green);font-weight:600;}
+.v-grey{color:var(--muted);font-weight:600;}
+
+.note{font-size:12px;color:var(--muted);margin-top:8px;}
+.legend .item{font-size:17px;margin-bottom:8px;}
+.reveal .slide-number{color:var(--muted);background:transparent;font-family:Outfit,Arial,sans-serif;font-size:12px;}
+</style>
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- 1. TITLE -->
+<section class="slide-title">
+  <div class="eyebrow">Delivery Hero · Logistics — Seamless</div>
+  <h1>MBR Seamless</h1>
+  <div class="accent-bar"></div>
+  <h2>Q2 2026 Review — what moved &amp; why</h2>
+  <p class="meta">2026 W28 · Version 2.0 · 2026-07-08 · Global &amp; per-brand · Q4 ’25 → Q1 ’26 → Q2 ’26</p>
+</section>
+
+<!-- 2. READING THIS DECK -->
+<section>
+  <div class="eyebrow">Reading this deck</div>
+  <h1>Scope, method &amp; verdict key</h1>
+  <div class="two-col">
+    <div class="col">
+      <div class="card">
+        <h3>Data &amp; definitions</h3>
+        <ul>
+          <li>On-time OKRs from On_Time_Analyzer; Woowa excluded; preorders &amp; non-completed orders excluded; raw minutes.</li>
+          <li>QC “shops” = the OKR’s Grocery-multicategory vertical list.</li>
+          <li>On-time OKRs &amp; PET are quarterly (Q4 → Q1 → Q2); OTX jump metrics are monthly (Apr → Jul ’26).</li>
+          <li>Every slide pairs the numbers (table) with the driver (crux) — kept separate.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <h3>Verdict key</h3>
+        <div class="legend">
+          <div class="item">🟢 <strong>On-track</strong> — on target / improving.</div>
+          <div class="item">🟡 <strong>At risk</strong> — flat, mixed or seasonal.</div>
+          <div class="item">🔴 <strong>Off-track</strong> — off target / worsening.</div>
+          <div class="item">⚪ <strong>Context</strong> — no formal target.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Source: W28 Seamless Performance deck (slides 1–59) + Q2 OKR Review. Synthesised, not re-queried.</p>
+</section>
+
+<!-- 3. GLOBAL SCORECARD + Q2 STORY -->
+<section>
+  <div class="eyebrow">Global scorecard</div>
+  <h1>Where the KPIs stand — and the Q2 story</h1>
+  <table class="data-table scorecard">
+    <thead>
+      <tr><th>KPI</th><th class="num">Q4 ’25</th><th class="num">Q1 ’26</th><th class="num">Q2 ’26</th><th>Target</th><th>Verdict</th><th>Leading mover</th></tr>
+    </thead>
+    <tbody>
+      <tr class="lead-down"><td>QC Shops Late &gt;15 %</td><td class="num">8.73</td><td class="num">9.61</td><td class="num">9.07</td><td>8.7</td><td class="v-red">🔴 Off-track</td><td>Talabat best · Hungerstation worst</td></tr>
+      <tr><td>Stacked On-Time %</td><td class="num">71.1</td><td class="num">70.1</td><td class="num">70.3</td><td>72.4</td><td class="v-red">🔴 Off-track</td><td>Glovo up · Pandora down</td></tr>
+      <tr><td>On-Time %</td><td class="num">78.8</td><td class="num">77.7</td><td class="num">78.5</td><td>–</td><td class="v-amber">🟡 At risk</td><td>Glovo/Efood up · Pandora down</td></tr>
+      <tr><td>Order Late &gt;20 %</td><td class="num">3.92</td><td class="num">4.29</td><td class="num">4.21</td><td>–</td><td class="v-red">🔴 Off-track</td><td>Pandora worst</td></tr>
+      <tr><td>PET score (global)</td><td class="num">7.43</td><td class="num">7.42</td><td class="num">7.30</td><td>+3.0%</td><td class="v-red">🔴 Off-track</td><td>HS up · Pedidosya down</td></tr>
+      <tr><td>ETA Jump Rate %</td><td class="num">–</td><td class="num">–</td><td class="num">42.5</td><td>reduce</td><td class="v-red">🔴 Off-track</td><td>Efood down · Talabat up</td></tr>
+      <tr class="lead-up"><td>CKT-OTP Jumps %</td><td class="num">–</td><td class="num">–</td><td class="num">15</td><td>reduce</td><td class="v-green">🟢 On-track</td><td>Foodora down · Pedidosya watch</td></tr>
+      <tr><td>Orders (M)</td><td class="num">560.6</td><td class="num">552.3</td><td class="num">611.0</td><td>–</td><td class="v-grey">⚪ Context</td><td>Busiest quarter yet</td></tr>
+    </tbody>
+  </table>
+  <div class="two-col">
+    <div class="col">
+      <div class="card hl-card">
+        <h3>Highlights</h3>
+        <ul>
+          <li>CKT-OTP jumps halved (24→15) after the PDT-ETA alignment rollout — ~€2.1M GMV.</li>
+          <li>On-Time recovered in Q2, led by Glovo &amp; Efood (delivery time + variance down).</li>
+          <li>PET switchback live in 15 countries; Talabat met the QC target.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card ll-card">
+        <h3>Lowlights</h3>
+        <ul>
+          <li>QC Shops Late&gt;15 missed target — Hungerstation the main driver.</li>
+          <li>Stacked On-Time off target both quarters — Pandora deteriorating.</li>
+          <li>Late&gt;20 and PET both below plan — Pandora &amp; Pedidosya seasonality.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="note">🟢 On-track · 🟡 At risk · 🔴 Off-track · ⚪ Context. OTX metrics are monthly — Q2 column shows Jul ’26 (see slides 5–6).</p>
+</section>
+
+<!-- 4. ETA JUMP RATE -->
+<section>
+  <div class="eyebrow">OTX · Order tracking experience</div>
+  <h1>ETA Jump Rate</h1>
+  <p class="tgt">Monthly, Apr → Jul ’26 · Target: reduce · 🔴 Off-track</p>
+  <p class="crux">Elevated — countdown jump-station experiments paused over ETA-accuracy concerns.</p>
+  <div class="kpi-body">
+    <div class="kpi-left">
+      <table class="data-table">
+        <thead><tr><th>Brand</th><th class="num">Apr</th><th class="num">May</th><th class="num">Jun</th><th class="num">Jul</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Global</td><td class="num">39.9</td><td class="num">42.7</td><td class="num">43.1</td><td class="num">42.5</td><td class="v-red">🔴 Off-track</td></tr>
+          <tr class="lead-up"><td>Efood</td><td class="num">27</td><td class="num">26</td><td class="num">22</td><td class="num">21</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Hungerstation</td><td class="num">15</td><td class="num">13</td><td class="num">11</td><td class="num">12</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Foodora inc Yemek</td><td class="num">23</td><td class="num">29</td><td class="num">28</td><td class="num">28</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Pedidosya</td><td class="num">20</td><td class="num">22</td><td class="num">22</td><td class="num">23</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Foodpanda</td><td class="num">32</td><td class="num">36</td><td class="num">40</td><td class="num">34</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Glovo</td><td class="num">67</td><td class="num">65</td><td class="num">67</td><td class="num">69</td><td class="v-red">🔴 Off-track</td></tr>
+          <tr class="lead-down"><td>Talabat</td><td class="num">65</td><td class="num">66</td><td class="num">67</td><td class="num">70</td><td class="v-red">🔴 Off-track</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-right">
+      <div class="card hl-card"><h3>Highlights</h3><ul>
+        <li>Efood &amp; HS are low and declining.</li>
+        <li>APAC countdown test running: −10% jump rate (HCSR +2.9%).</li>
+      </ul></div>
+      <div class="card ll-card"><h3>Lowlights</h3><ul>
+        <li>Glovo (69) and Talabat (70) sit structurally high and rose again.</li>
+        <li>Global drifted up to 42.5.</li>
+      </ul></div>
+      <div class="card cx-card"><h3>Crux</h3><ul>
+        <li>TB &amp; GV countdown experiments stopped over ETA-accuracy concerns.</li>
+        <li>Next: analyse results; PYJumps range-expiry cut jumps −30% but raised HCSR/CCR — not rolled out.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. CKT-OTP JUMPS -->
+<section>
+  <div class="eyebrow">OTX · Order tracking experience</div>
+  <h1>CKT-OTP Jumps</h1>
+  <p class="tgt">Monthly, Apr → Jul ’26 · Target: reduce · 🟢 On-track</p>
+  <p class="crux">Halved after the PDT-ETA alignment rollout — €2.1M GMV.</p>
+  <div class="kpi-body">
+    <div class="kpi-left">
+      <table class="data-table">
+        <thead><tr><th>Brand</th><th class="num">Apr</th><th class="num">May</th><th class="num">Jun</th><th class="num">Jul</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Global</td><td class="num">24</td><td class="num">29</td><td class="num">15</td><td class="num">15</td><td class="v-green">🟢 On-track</td></tr>
+          <tr class="lead-up"><td>Foodora inc Yemek</td><td class="num">41</td><td class="num">57</td><td class="num">20</td><td class="num">20</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Glovo</td><td class="num">27</td><td class="num">42</td><td class="num">14</td><td class="num">14</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Efood</td><td class="num">35</td><td class="num">41</td><td class="num">15</td><td class="num">15</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Hungerstation</td><td class="num">28</td><td class="num">29</td><td class="num">14</td><td class="num">14</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Foodpanda</td><td class="num">21</td><td class="num">20</td><td class="num">14</td><td class="num">14</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Talabat</td><td class="num">18</td><td class="num">19</td><td class="num">13</td><td class="num">12</td><td class="v-green">🟢 On-track</td></tr>
+          <tr class="lead-down"><td>Pedidosya</td><td class="num">29</td><td class="num">35</td><td class="num">16</td><td class="num">18</td><td class="v-amber">🟡 At risk</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-right">
+      <div class="card hl-card"><h3>Highlights</h3><ul>
+        <li>Global 38→15 after the end-May PDT-ETA alignment A/B.</li>
+        <li>Every brand converged to ~12–20 by Jul (Foodora 57→20, Glovo 42→14).</li>
+      </ul></div>
+      <div class="card ll-card"><h3>Lowlights</h3><ul>
+        <li>Pedidosya ticked back up Jun→Jul (16→18).</li>
+        <li>Marginal HCSR increase from the alignment change.</li>
+      </ul></div>
+      <div class="card cx-card"><h3>Crux</h3><ul>
+        <li>~€2.1M GMV, driven by orders-per-user &amp; cancellation gains.</li>
+        <li>Next: reassess remaining PDT-ETA misalignment drivers; align on full rollout.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. QC SHOPS LATE >15 -->
+<section>
+  <div class="eyebrow">On-Time OKR · 01</div>
+  <h1>QC Shops Late &gt;15</h1>
+  <p class="tgt">Quarterly · Target Q2 8.7 · 🔴 Off-track (9.07)</p>
+  <p class="crux">Missed the Q2 target — the promise tightened while delivery time didn’t change or reduce.</p>
+  <div class="kpi-body">
+    <div class="kpi-left">
+      <table class="data-table">
+        <thead><tr><th>Brand</th><th class="num">Q4</th><th class="num">Q1</th><th class="num">Q2</th><th class="num">vs tgt</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Global</td><td class="num">8.73</td><td class="num">9.61</td><td class="num">9.07</td><td class="num">+0.37</td><td class="v-red">🔴 Off-track</td></tr>
+          <tr class="lead-up"><td>Talabat</td><td class="num">7.5</td><td class="num">9.6</td><td class="num">7.7</td><td class="num">−1.0</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Pedidosya</td><td class="num">7.3</td><td class="num">8.0</td><td class="num">8.5</td><td class="num">−0.2</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Glovo</td><td class="num">10.6</td><td class="num">10.4</td><td class="num">9.6</td><td class="num">+0.9</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Efood</td><td class="num">10.7</td><td class="num">10.6</td><td class="num">10.0</td><td class="num">+1.3</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Pandora</td><td class="num">9.9</td><td class="num">10.0</td><td class="num">10.5</td><td class="num">+1.8</td><td class="v-red">🔴 Off-track</td></tr>
+          <tr class="lead-down"><td>Hungerstation</td><td class="num">8.0</td><td class="num">8.6</td><td class="num">11.4</td><td class="num">+2.7</td><td class="v-red">🔴 Off-track</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-right">
+      <div class="card hl-card"><h3>Highlights</h3><ul>
+        <li>Talabat best and met (7.7); Pedidosya met (8.5).</li>
+        <li>Efood &amp; Glovo above target but improving every quarter.</li>
+      </ul></div>
+      <div class="card ll-card"><h3>Lowlights</h3><ul>
+        <li>Hungerstation the driver: +3.4pp over three quarters (8.0→11.4).</li>
+        <li>Pandora worsening (9.9→10.5).</li>
+      </ul></div>
+      <div class="card cx-card"><h3>Crux</h3><ul>
+        <li>HS fleet got ~4 min faster and prep improved, yet QC rose — cause is the PDT model, not riders (promise-error vs QC-late correlate −0.98).</li>
+        <li>Pandora is the opposite: delivery genuinely slower.</li>
+        <li>Next: DS to review SA grocery-shops PDT calibration; monitor AGF PDT; Pandora needs DT reduction / dispatch.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. STACKED ON-TIME -->
+<section>
+  <div class="eyebrow">On-Time OKR · 02</div>
+  <h1>Stacked On-Time</h1>
+  <p class="tgt">Quarterly · Target 72.4 · 🔴 Off-track (70.3)</p>
+  <p class="crux">Stacked orders continue to be a problem — but Efood &amp; Glovo prove it’s solvable.</p>
+  <div class="kpi-body">
+    <div class="kpi-left">
+      <table class="data-table">
+        <thead><tr><th>Brand</th><th class="num">Q4</th><th class="num">Q1</th><th class="num">Q2</th><th class="num">vs tgt</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Global</td><td class="num">71.1</td><td class="num">70.1</td><td class="num">70.3</td><td class="num">−2.1</td><td class="v-red">🔴 Off-track</td></tr>
+          <tr><td>Efood</td><td class="num">72.6</td><td class="num">71.2</td><td class="num">73.6</td><td class="num">+1.2</td><td class="v-green">🟢 On-track</td></tr>
+          <tr class="lead-up"><td>Glovo</td><td class="num">65.8</td><td class="num">66.0</td><td class="num">68.4</td><td class="num">−4.0</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Pedidosya</td><td class="num">74.9</td><td class="num">75.3</td><td class="num">73.1</td><td class="num">+0.7</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Talabat</td><td class="num">73.5</td><td class="num">69.5</td><td class="num">72.0</td><td class="num">−0.4</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Hungerstation</td><td class="num">64.9</td><td class="num">58.6</td><td class="num">65.0</td><td class="num">−7.4</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr class="lead-down"><td>Pandora</td><td class="num">70.0</td><td class="num">69.1</td><td class="num">68.8</td><td class="num">−3.6</td><td class="v-red">🔴 Off-track</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-right">
+      <div class="card hl-card"><h3>Highlights</h3><ul>
+        <li>Efood above target and improving (73.6).</li>
+        <li>Glovo improving fast (65.8→68.4); HS &amp; Talabat recovered their Q1 dips.</li>
+      </ul></div>
+      <div class="card ll-card"><h3>Lowlights</h3><ul>
+        <li>Off target both quarters (~−2pp).</li>
+        <li>Pandora worse every quarter; double stacks rising in Pandora &amp; Pedidosya.</li>
+      </ul></div>
+      <div class="card cx-card"><h3>Crux</h3><ul>
+        <li>On-time falls ~10–18pp for each extra order in the bag (HS −32pp into double+).</li>
+        <li>Pandora sequences stacked orders worse under the same load — a dispatch issue, not just demand.</li>
+        <li>Next: stacked-specific sequencing / PDT for Pandora &amp; PeYa; copy the Efood/Glovo approach.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. ON-TIME RATE -->
+<section>
+  <div class="eyebrow">On-Time OKR · 03 · trend</div>
+  <h1>On-Time Rate</h1>
+  <p class="tgt">Quarterly · No formal target · net −0.29 · 🟡 At risk</p>
+  <p class="crux">Flat overall — Glovo &amp; Efood gains offset Pandora’s decline.</p>
+  <div class="kpi-body">
+    <div class="kpi-left">
+      <table class="data-table">
+        <thead><tr><th>Brand</th><th class="num">Q4</th><th class="num">Q1</th><th class="num">Q2</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Global</td><td class="num">78.8</td><td class="num">77.7</td><td class="num">78.5</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Talabat</td><td class="num">82.6</td><td class="num">80.9</td><td class="num">83.2</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Hungerstation</td><td class="num">81.8</td><td class="num">77.4</td><td class="num">81.2</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr class="lead-up"><td>Glovo</td><td class="num">73.3</td><td class="num">73.0</td><td class="num">74.7</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Efood</td><td class="num">78.2</td><td class="num">77.1</td><td class="num">78.9</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Pedidosya</td><td class="num">78.4</td><td class="num">79.9</td><td class="num">78.2</td><td class="v-red">🔴 Off-track</td></tr>
+          <tr class="lead-down"><td>Pandora</td><td class="num">77.5</td><td class="num">76.3</td><td class="num">75.6</td><td class="v-red">🔴 Off-track</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-right">
+      <div class="card hl-card"><h3>Highlights</h3><ul>
+        <li>Glovo &amp; Efood genuinely improving — delivery time + variance down.</li>
+        <li>Talabat &amp; HS recovered from Q1 seasonal dips.</li>
+      </ul></div>
+      <div class="card ll-card"><h3>Lowlights</h3><ul>
+        <li>Pandora is worse every quarter (77.5→75.6).</li>
+        <li>Pedidosya reversed in Q2 (79.9→78.2).</li>
+      </ul></div>
+      <div class="card cx-card"><h3>Crux</h3><ul>
+        <li>Pandora: rising delivery time and variance, promise behind actual; loses ground at low/normal saturation.</li>
+        <li>Next: retune Pandora PDT to the higher variance; control triple+ stacks; adopt the Glovo/Efood approach.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. ORDER LATE >20 -->
+<section>
+  <div class="eyebrow">On-Time OKR · 04 · trend</div>
+  <h1>Order Late &gt;20</h1>
+  <p class="tgt">Quarterly · No formal target · 🔴 Off-track (4.21 vs Q4 3.92)</p>
+  <p class="crux">Above Q4 — Pandora’s long deliveries are increasing.</p>
+  <div class="kpi-body">
+    <div class="kpi-left">
+      <table class="data-table">
+        <thead><tr><th>Brand</th><th class="num">Q4</th><th class="num">Q1</th><th class="num">Q2</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td>Global</td><td class="num">3.92</td><td class="num">4.29</td><td class="num">4.21</td><td class="v-red">🔴 Off-track</td></tr>
+          <tr class="lead-up"><td>Efood</td><td class="num">4.1</td><td class="num">4.0</td><td class="num">3.7</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Glovo</td><td class="num">4.8</td><td class="num">4.8</td><td class="num">4.4</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Hungerstation</td><td class="num">2.8</td><td class="num">3.9</td><td class="num">3.0</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Talabat</td><td class="num">2.8</td><td class="num">3.8</td><td class="num">3.0</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Pedidosya</td><td class="num">3.8</td><td class="num">3.8</td><td class="num">4.5</td><td class="v-red">🔴 Off-track</td></tr>
+          <tr class="lead-down"><td>Pandora</td><td class="num">4.7</td><td class="num">4.8</td><td class="num">5.3</td><td class="v-red">🔴 Off-track</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-right">
+      <div class="card hl-card"><h3>Highlights</h3><ul>
+        <li>Efood, Glovo, HS and Talabat all low or improving.</li>
+      </ul></div>
+      <div class="card ll-card"><h3>Lowlights</h3><ul>
+        <li>Pandora rising every quarter (4.7→5.3).</li>
+        <li>Pedidosya grew in Q2 (3.8→4.5).</li>
+      </ul></div>
+      <div class="card cx-card"><h3>Crux</h3><ul>
+        <li>Pandora’s long deliveries are real (DT&gt;45 13.6→15.4%, 60m+ 4.2→4.9%); double stacks dominate the tail (7.7 vs 3.8).</li>
+        <li>PeYa’s rise = delivery time + promise drift + a small World-Cup effect (~1.3pp).</li>
+        <li>Next: Pandora — reduce delivery time (dispatch + vendor lateness), not the promise; PeYa — fix the DT/PDT drift first.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. PET MOVEMENT -->
+<section>
+  <div class="eyebrow">PET · Predicted eater time</div>
+  <h1>PET Movement</h1>
+  <p class="tgt">Q1 → Q2 PET score (lower is better) · Target +3.0% · 🔴 Off-track (+0.6%)</p>
+  <p class="crux">Below the revised Q2 target — switchback gains offset by Pandora &amp; PeYa seasonality.</p>
+  <div class="kpi-body">
+    <div class="kpi-left">
+      <table class="data-table">
+        <thead><tr><th>Brand</th><th class="num">Q1</th><th class="num">Q2</th><th class="num">% Δ (better +)</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr class="lead-up"><td>Hungerstation</td><td class="num">12.24</td><td class="num">11.50</td><td class="num">+6.05</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Efood</td><td class="num">5.32</td><td class="num">5.00</td><td class="num">+6.02</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Talabat</td><td class="num">9.31</td><td class="num">8.93</td><td class="num">+4.08</td><td class="v-green">🟢 On-track</td></tr>
+          <tr><td>Glovo</td><td class="num">5.90</td><td class="num">5.82</td><td class="num">+1.36</td><td class="v-amber">🟡 At risk</td></tr>
+          <tr><td>Pandora</td><td class="num">5.90</td><td class="num">6.06</td><td class="num">−2.71</td><td class="v-red">🔴 Off-track</td></tr>
+          <tr class="lead-down"><td>Pedidosya</td><td class="num">6.33</td><td class="num">6.52</td><td class="num">−3.00</td><td class="v-red">🔴 Off-track</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-right">
+      <div class="card hl-card"><h3>Highlights</h3><ul>
+        <li>EPT switchback rolled out in 15 countries (avg −0.11 min/country).</li>
+        <li>HS, Efood and Talabat all improved Q1→Q2 (+4 to +6%).</li>
+      </ul></div>
+      <div class="card ll-card"><h3>Lowlights</h3><ul>
+        <li>Aggregate +0.6% vs the revised +3.0% target.</li>
+        <li>Pandora and Pedidosya both deteriorated.</li>
+      </ul></div>
+      <div class="card cx-card"><h3>Crux</h3><ul>
+        <li>Pandora: monsoon + Q2 festivities raise TTP. Pedidosya: Argentina (50–60% of volume) winter + World-Cup spikes.</li>
+        <li>Next: switchback for Pandora QC + PeYa/TB/Efood restaurants; increase model usage &amp; reduce AGF in MENA shops.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. TSDK / MAP EXPERIMENTS -->
+<section>
+  <div class="eyebrow">TSDK · Map component experiments</div>
+  <h1>TSDK / Map component</h1>
+  <p class="tgt">Experiment status · 🟡 At risk (no significant change yet)</p>
+  <p class="crux">Rolling out with stable business metrics — no significant change yet.</p>
+  <div class="kpi-body">
+    <div class="kpi-left">
+      <table class="data-table">
+        <thead><tr><th>Brand</th><th>Version</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr class="lead-up"><td>Glovo</td><td>Map V1</td><td class="v-green">🟢 Rolled out (wk 17)</td></tr>
+          <tr><td>Efood</td><td>Map V2</td><td class="v-amber">🟡 Android live 30 Jun; iOS 13 Jul</td></tr>
+          <tr><td>Pedidosya</td><td>Map V2</td><td class="v-amber">🟡 Staff release 6 Jul</td></tr>
+          <tr><td>Hungerstation</td><td>Map V2</td><td class="v-amber">🟡 OD staff release; VD blocked</td></tr>
+          <tr class="lead-down"><td>Glovo</td><td>Map V2</td><td class="v-red">🔴 Postponed to Q3</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="kpi-right">
+      <div class="card hl-card"><h3>Highlights</h3><ul>
+        <li>Map V1 rolled out in Glovo; V2 progressing in Efood &amp; PeYa.</li>
+        <li>Business metrics stable across all A/Bs.</li>
+      </ul></div>
+      <div class="card ll-card"><h3>Lowlights</h3><ul>
+        <li>Glovo V2 postponed to Q3; HS VD blocked on platform development.</li>
+        <li>No statistically significant change observed so far.</li>
+      </ul></div>
+      <div class="card cx-card"><h3>Crux</h3><ul>
+        <li>Still an experiment track, not yet a proven KPI mover.</li>
+        <li>Next: TSDK-maps vs brand-maps A/B in Efood &amp; PeYa; V2 in HS &amp; GV for OD orders.</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12. CONSOLIDATED RECOMMENDATIONS -->
+<section>
+  <div class="eyebrow">Summary</div>
+  <h1>Consolidated recommendations &amp; owners</h1>
+  <table class="data-table">
+    <thead><tr><th>Owner</th><th>Action</th><th>Touches</th></tr></thead>
+    <tbody>
+      <tr><td><strong>DS</strong></td><td>Investigate PDT model health / calibration (SA grocery-shops PDT); retune Pandora PDT to rising variance; set stacked-order PDT to the depth penalty.</td><td>QC · Stacked · On-Time</td></tr>
+      <tr><td><strong>Dispatch</strong></td><td>Sequence complex stacks better; control &amp; optimise high-stack (triple+) orders.</td><td>Stacked · On-Time · Late&gt;20</td></tr>
+      <tr><td><strong>Brand ops</strong></td><td>Pandora delivery-time reduction (dispatch + vendor lateness); address the Pedidosya DT / PDT drift.</td><td>On-Time · Late&gt;20</td></tr>
+      <tr><td><strong>Playbook</strong></td><td>Roll the Efood / Glovo model — delivery-time + variance control while stacking grew — to Pandora / PeYa.</td><td>Stacked · On-Time</td></tr>
+      <tr><td><strong>Seasonal</strong></td><td>Control PDT-buffer usage &amp; automate — manage Eid / World-Cup spikes.</td><td>On-Time · Late&gt;20 · PET</td></tr>
+      <tr><td><strong>OTX</strong></td><td>Analyse countdown ETA jump-station results; reassess remaining PDT-ETA misalignment drivers.</td><td>Jump rate · CKT-OTP</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Owners &amp; actions consolidated from the Q2 OKR Review recommendation slides.</p>
+</section>
+
+</div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script>
+Reveal.initialize({hash:true, slideNumber:true, width:1280, height:720, margin:0, transition:'slide'});
+</script>
+</body>
+</html>

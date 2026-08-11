@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q3 2025 Experiments Calendar</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 2rem;
+    }
+
+    .legend {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      padding: 1rem;
+      background: #fafafa;
+      border-radius: 6px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .legend-box {
+      width: 14px;
+      height: 14px;
+      border-radius: 2px;
+    }
+
+    .pdt-color { background: #85B7EB; }
+    .ept-color { background: #97C459; }
+    .dtm-color { background: #EF9F27; }
+    .otx-color { background: #5DCAA5; }
+
+    .scroll-container {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: 160px repeat(13, minmax(140px, 1fr));
+      gap: 1px;
+      background: #d0d0d0;
+      padding: 1px;
+      min-width: 1600px;
+    }
+
+    .matrix-cell {
+      background: white;
+      padding: 12px;
+      min-height: 120px;
+      font-size: 11px;
+      line-height: 1.4;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .matrix-header {
+      background: #2c3e50;
+      color: white;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px 12px;
+    }
+
+    .matrix-brand {
+      background: #34495e;
+      color: white;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      text-align: left;
+    }
+
+    .empty {
+      background: #f9f9f9;
+    }
+
+    .exp-badge {
+      display: inline-block;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    .pdt { background: #85B7EB; color: #0C447C; }
+    .ept { background: #97C459; color: #3B6D11; }
+    .dtm { background: #EF9F27; color: #633806; }
+    .otx { background: #5DCAA5; color: #085041; }
+
+    .status-done {
+      opacity: 0.8;
+      border: 0.5px solid rgba(0,0,0,0.2);
+    }
+
+    .status-cancelled {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+
+    .status-inprogress {
+      font-weight: bold;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .summary-card {
+      background: #fafafa;
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 4px solid #2c3e50;
+    }
+
+    .summary-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+
+    .summary-card p {
+      font-size: 13px;
+      color: #666;
+      margin: 4px 0;
+    }
+
+    .summary-number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .insights {
+      background: #ecf0f1;
+      padding: 1.5rem;
+      border-radius: 6px;
+      margin-top: 2rem;
+    }
+
+    .insights h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+
+    .insights ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .insights li {
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 0.5rem;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .insights li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+
+    @media (max-width: 1400px) {
+      body {
+        padding: 1rem;
+      }
+      .container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Q3 2025 Experiments Calendar</h1>
+    <p class="subtitle">Seamless domain experiments mapped by brand and week • July–October 2025</p>
+
+    <div class="summary">
+      <div class="summary-card">
+        <h3>Total Experiments</h3>
+        <p class="summary-number">50</p>
+        <p>Across 4 brands/markets</p>
+      </div>
+      <div class="summary-card">
+        <h3>Global/Central</h3>
+        <p class="summary-number">43</p>
+        <p>86% of portfolio</p>
+      </div>
+      <div class="summary-card">
+        <h3>Peak Activity</h3>
+        <p class="summary-number">W36–W40</p>
+        <p>Late Q3 concentration</p>
+      </div>
+      <div class="summary-card">
+        <h3>Cancellations</h3>
+        <p class="summary-number">10</p>
+        <p>DNS & ETA scope issues</p>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-box pdt-color"></div>
+        <span><strong>PDT Ranges</strong> — Delivery time ranges</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box ept-color"></div>
+        <span><strong>EPT Quantiles</strong> — Estimate time quantiles</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box dtm-color"></div>
+        <span><strong>EPT Model Improvements</strong> — DTM v4</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box otx-color"></div>
+        <span><strong>OTX</strong> — Order tracking experience</span>
+      </div>
+      <div class="legend-item">
+        <span>| <em>Strikethrough</em> = Cancelled | <em>Faded</em> = Completed |</span>
+      </div>
+    </div>
+
+    <div class="scroll-container">
+      <div class="matrix">
+        <!-- Header Row -->
+        <div class="matrix-cell matrix-header"></div>
+        <div class="matrix-cell matrix-header">W27<br/>Jun 23–29</div>
+        <div class="matrix-cell matrix-header">W30<br/>Jul 21–27</div>
+        <div class="matrix-cell matrix-header">W31<br/>Jul 28–Aug 3</div>
+        <div class="matrix-cell matrix-header">W32<br/>Aug 4–10</div>
+        <div class="matrix-cell matrix-header">W33<br/>Aug 11–17</div>
+        <div class="matrix-cell matrix-header">W34<br/>Aug 18–24</div>
+        <div class="matrix-cell matrix-header">W35<br/>Aug 25–31</div>
+        <div class="matrix-cell matrix-header">W36<br/>Sep 1–7</div>
+        <div class="matrix-cell matrix-header">W37<br/>Sep 8–14</div>
+        <div class="matrix-cell matrix-header">W38<br/>Sep 15–21</div>
+        <div class="matrix-cell matrix-header">W39<br/>Sep 22–28</div>
+        <div class="matrix-cell matrix-header">W40<br/>Sep 29–Oct 5</div>
+
+        <!-- Global/Central -->
+        <div class="matrix-cell matrix-brand">Central (Global)<br/><span style="font-size: 11px; font-weight: normal; opacity: 0.9;">47 experiments</span></div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt status-done">PDT×3 (done)</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">Routes</span>
+          <span class="exp-badge otx">DNS</span>
+          <span class="exp-badge otx">ETA×4</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">ETA×3</span>
+          <span class="exp-badge otx">DNS</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge otx">Jump</span>
+          <span class="exp-badge otx">DNS</span>
+          <span class="exp-badge otx">Track</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT×2</span>
+          <span class="exp-badge otx">DNS×2</span>
+          <span class="exp-badge otx status-cancelled">ETA fmt</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge dtm">DTM v4×3</span>
+          <span class="exp-badge otx">DNS</span>
+          <span class="exp-badge otx">Stab</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">Saver</span>
+          <span class="exp-badge ept">EPT×3</span>
+          <span class="exp-badge dtm">DTM v4</span>
+          <span class="exp-badge otx">Jump</span>
+          <span class="exp-badge otx">ETA fmt</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge dtm">OEC Bal</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx status-inprogress">Jump+</span>
+          <span class="exp-badge otx status-inprogress">Stab+</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT×2</span>
+          <span class="exp-badge ept">EPT×2</span>
+          <span class="exp-badge dtm">DTM×2</span>
+          <span class="exp-badge otx">Multi</span>
+        </div>
+
+        <!-- PeYa -->
+        <div class="matrix-cell matrix-brand">PeYa (Argentina)<br/><span style="font-size: 11px; font-weight: normal; opacity: 0.9;">1 experiment</span></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx status-cancelled">Routes</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+
+        <!-- HS/Foodora Europe -->
+        <div class="matrix-cell matrix-brand">HS/Foodora (Europe)<br/><span style="font-size: 11px; font-weight: normal; opacity: 0.9;">2 experiments</span></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx status-cancelled">Bad weather</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+
+        <!-- QuickCommerce -->
+        <div class="matrix-cell matrix-brand">QuickCommerce (QC)<br/><span style="font-size: 11px; font-weight: normal; opacity: 0.9;">1 experiment</span></div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt status-done">QC ranges</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+
+        <!-- Regional HS -->
+        <div class="matrix-cell matrix-brand">Regional (HS)<br/><span style="font-size: 11px; font-weight: normal; opacity: 0.9;">1 experiment</span></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx status-cancelled">Routes (stacked)</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+      </div>
+    </div>
+
+    <div class="insights">
+      <h2>Key Insights</h2>
+      <ul>
+        <li><strong>Global/Central dominates:</strong> 43 of 50 experiments (86%). Centralized decision-making with limited regional variation.</li>
+        <li><strong>Early wins (W27–W33):</strong> PDT ranges (3 done), Route distance + boosted trees, Jump Station impact validated.</li>
+        <li><strong>Mid-Q3 DNS crisis (W32–W34):</strong> 4 DNS experiments cancelled due to conflict with PY's DNS text-copy A/B test. Scope blocker.</li>
+        <li><strong>Peak activity W36–W40:</strong> DTM v4 ramp, EPT quantiles concentrated, Central Stabilization ongoing beyond Q3 end.</li>
+        <li><strong>PeYa & Foodora minimal:</strong> Only 3 experiments each, mostly off-calendar or cancelled (Routes W34 for PeYa). Central-led strategy.</li>
+        <li><strong>Regional: Single test:</strong> Routes stacked-order visibility (W37, cancelled). Limited decentralized experimentation.</li>
+        <li><strong>Cancellation pattern:</strong> 10 total (20% rate). DNS + ETA scope issues signal prioritization or technical constraints.</li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e0e0e0; color: #999; font-size: 12px;">
+      <p>Generated from Q3 2025 experiments spreadsheet • Week dates are ISO calendar weeks</p>
+    </div>
+  </div>
+</body>
+</html>

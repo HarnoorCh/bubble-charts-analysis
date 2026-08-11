@@ -1,0 +1,126 @@
+{
+  "_comment": "Declarative signal catalog. Single source of truth for both the combined BigQuery scan and the dashboard's JS signal list. type=ratio -> SAFE_DIVIDE(COUNTIF(num),COUNTIF(den))*100; type=average -> AVG(IF(filter,expr,NULL)); type=external -> merged from signals_external.json (no expr); type=custom -> added via `build_dashboard.py --add-history`, run as a separate bq job and joined on country_code. dir=higher|lower means which direction is 'better' (default; editable in UI). fmt is a named formatter (pct2|pct1|pct3|min2|sec0|int).",
+  "signals": [
+    {
+      "key": "pct_stacked",
+      "label": "Stacking %",
+      "group": "Stacking",
+      "dir": "higher",
+      "fmt": "pct2",
+      "default_weight": 1,
+      "type": "ratio",
+      "active": true,
+      "expr": "SAFE_DIVIDE(COUNTIF(stacks >= 1), COUNT(*)) * 100"
+    },
+    {
+      "key": "rider_accept_time",
+      "label": "Rider acceptance (s)",
+      "group": "Rider",
+      "dir": "higher",
+      "fmt": "sec0",
+      "default_weight": 1,
+      "type": "average",
+      "active": true,
+      "expr": "AVG(rider_reaction_time)"
+    },
+    {
+      "key": "pct_on_time",
+      "label": "% on-time (±10m)",
+      "group": "Timeliness",
+      "dir": "lower",
+      "fmt": "pct2",
+      "default_weight": 1,
+      "type": "ratio",
+      "active": true,
+      "expr": "SAFE_DIVIDE(COUNTIF(pdt_min IS NOT NULL AND ABS(dt_min - pdt_min) <= 10), COUNTIF(pdt_min IS NOT NULL)) * 100"
+    },
+    {
+      "key": "pct_on_time_stacked",
+      "label": "% stacked on-time",
+      "group": "Timeliness",
+      "dir": "lower",
+      "fmt": "pct2",
+      "default_weight": 2,
+      "type": "ratio",
+      "active": true,
+      "expr": "SAFE_DIVIDE(COUNTIF(stacks > 0 AND pdt_min IS NOT NULL AND ABS(dt_min - pdt_min) <= 10), COUNTIF(stacks > 0 AND pdt_min IS NOT NULL)) * 100"
+    },
+    {
+      "key": "pct_dt_over_45",
+      "label": "DT > 45 min %",
+      "group": "Timeliness",
+      "dir": "lower",
+      "fmt": "pct2",
+      "default_weight": 1,
+      "type": "ratio",
+      "active": false,
+      "expr": "SAFE_DIVIDE(COUNTIF(dt_min > 45), COUNT(*)) * 100"
+    },
+    {
+      "key": "pct_rider_late",
+      "label": "Rider late % (>10m)",
+      "group": "Rider",
+      "dir": "lower",
+      "fmt": "pct2",
+      "default_weight": 1,
+      "type": "ratio",
+      "active": false,
+      "expr": "SAFE_DIVIDE(COUNTIF(rider_late_min IS NOT NULL AND rider_late_min > 10), COUNTIF(rider_late_min IS NOT NULL)) * 100"
+    },
+    {
+      "key": "avg_dt",
+      "label": "Delivery time (min)",
+      "group": "Timeliness",
+      "dir": "lower",
+      "fmt": "min2",
+      "default_weight": 1,
+      "type": "average",
+      "active": false,
+      "expr": "AVG(dt_min)"
+    },
+    {
+      "key": "avg_ept",
+      "label": "EPT (min)",
+      "group": "Prep",
+      "dir": "lower",
+      "fmt": "min2",
+      "default_weight": 1,
+      "type": "average",
+      "active": false,
+      "expr": "AVG(ept_min)"
+    },
+    {
+      "key": "avg_awt",
+      "label": "AWT (min)",
+      "group": "PET components",
+      "dir": "lower",
+      "fmt": "min2",
+      "default_weight": 1,
+      "type": "average",
+      "active": false,
+      "expr": "AVG(awt_min)"
+    },
+    {
+      "key": "avg_created_to_pu",
+      "label": "Created→pickup (min)",
+      "group": "PET components",
+      "dir": "lower",
+      "fmt": "min2",
+      "default_weight": 1,
+      "type": "average",
+      "active": false,
+      "expr": "AVG(created_to_pu)"
+    },
+    {
+      "key": "training_min",
+      "label": "Training time (min)",
+      "group": "Enablement",
+      "dir": "lower",
+      "fmt": "min2",
+      "default_weight": 1,
+      "type": "external",
+      "active": true,
+      "source": "signals_external.json"
+    }
+  ]
+}

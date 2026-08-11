@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q3 2025 Experiments by Brand</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 2rem;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: #fafafa;
+      border-radius: 6px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .legend-box {
+      width: 14px;
+      height: 14px;
+      border-radius: 2px;
+    }
+
+    .pdt-color { background: #85B7EB; }
+    .ept-color { background: #97C459; }
+    .dtm-color { background: #EF9F27; }
+    .otx-color { background: #5DCAA5; }
+
+    .scroll-container {
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: 160px repeat(14, minmax(130px, 1fr));
+      gap: 1px;
+      background: #d0d0d0;
+      padding: 1px;
+      min-width: 1700px;
+    }
+
+    .matrix-cell {
+      background: white;
+      padding: 10px;
+      min-height: 110px;
+      font-size: 10px;
+      line-height: 1.3;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .matrix-header {
+      background: #2c3e50;
+      color: white;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 14px 10px;
+      font-size: 12px;
+    }
+
+    .matrix-brand {
+      background: #34495e;
+      color: white;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .empty {
+      background: #f9f9f9;
+    }
+
+    .exp-badge {
+      display: inline-block;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 9px;
+      font-weight: 600;
+      white-space: nowrap;
+      line-height: 1.2;
+      border: 0.5px solid rgba(0,0,0,0.1);
+    }
+
+    .pdt { background: #85B7EB; color: #0C447C; }
+    .ept { background: #97C459; color: #3B6D11; }
+    .dtm { background: #EF9F27; color: #633806; }
+    .otx { background: #5DCAA5; color: #085041; }
+
+    .status-done {
+      opacity: 0.75;
+      border: 0.5px solid rgba(0,0,0,0.2);
+    }
+
+    .status-cancelled {
+      text-decoration: line-through;
+      opacity: 0.45;
+    }
+
+    .status-inprogress {
+      font-weight: bold;
+      border: 0.5px solid rgba(0,0,0,0.3);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .summary-card {
+      background: #fafafa;
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 4px solid #2c3e50;
+    }
+
+    .summary-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+    }
+
+    .summary-card p {
+      font-size: 13px;
+      color: #666;
+      margin: 4px 0;
+    }
+
+    .summary-number {
+      font-size: 22px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .insights {
+      background: #ecf0f1;
+      padding: 1.5rem;
+      border-radius: 6px;
+      margin-top: 2rem;
+    }
+
+    .insights h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+
+    .insights ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .insights li {
+      font-size: 13px;
+      color: #333;
+      margin-bottom: 0.6rem;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .insights li:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+
+    .note {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+      font-size: 12px;
+      color: #856404;
+    }
+
+    @media (max-width: 1400px) {
+      body {
+        padding: 1rem;
+      }
+      .container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Q3 2025 Experiments by Brand</h1>
+    <p class="subtitle">Central experiments mapped across Seamless platforms • July–October 2025</p>
+
+    <div class="summary">
+      <div class="summary-card">
+        <h3>Total Experiments</h3>
+        <p class="summary-number">50</p>
+        <p>Global centralized pipeline</p>
+      </div>
+      <div class="summary-card">
+        <h3>Topics</h3>
+        <p class="summary-number">4</p>
+        <p>PDT, EPT, DTM, OTX</p>
+      </div>
+      <div class="summary-card">
+        <h3>Peak Activity</h3>
+        <p class="summary-number">W36–W40</p>
+        <p>Late Q3 concentration</p>
+      </div>
+      <div class="summary-card">
+        <h3>Cancellations</h3>
+        <p class="summary-number">10</p>
+        <p>Scope/priority issues</p>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-box pdt-color"></div>
+        <span><strong>PDT Ranges</strong></span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box ept-color"></div>
+        <span><strong>EPT Quantiles</strong></span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box dtm-color"></div>
+        <span><strong>EPT Model Improvements</strong></span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-box otx-color"></div>
+        <span><strong>OTX</strong> (Order Tracking)</span>
+      </div>
+      <div class="legend-item">
+        <span><em>Faded</em> = Done | <em>Strikethrough</em> = Cancelled | <em>Bold</em> = In Progress</span>
+      </div>
+    </div>
+
+    <div class="scroll-container">
+      <div class="matrix">
+        <!-- Header Row -->
+        <div class="matrix-cell matrix-header"></div>
+        <div class="matrix-cell matrix-header">W27</div>
+        <div class="matrix-cell matrix-header">W30</div>
+        <div class="matrix-cell matrix-header">W31</div>
+        <div class="matrix-cell matrix-header">W32</div>
+        <div class="matrix-cell matrix-header">W33</div>
+        <div class="matrix-cell matrix-header">W34</div>
+        <div class="matrix-cell matrix-header">W35</div>
+        <div class="matrix-cell matrix-header">W36</div>
+        <div class="matrix-cell matrix-header">W37</div>
+        <div class="matrix-cell matrix-header">W38</div>
+        <div class="matrix-cell matrix-header">W39</div>
+        <div class="matrix-cell matrix-header">W40</div>
+        <div class="matrix-cell matrix-header">W41+</div>
+
+        <!-- Pandora -->
+        <div class="matrix-cell matrix-brand">Pandora</div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt status-done">PDT×3</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">Routes</span>
+          <span class="exp-badge otx">ETA×4</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">ETA×3</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">Jump</span>
+          <span class="exp-badge otx">DNS</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT×2</span>
+          <span class="exp-badge otx">DNS×2</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge dtm">DTM×3</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">Saver</span>
+          <span class="exp-badge ept">EPT×3</span>
+          <span class="exp-badge dtm">DTM</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge dtm">OEC</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx status-inprogress">Jump+</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT×2</span>
+          <span class="exp-badge ept">EPT×2</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+
+        <!-- Glovo -->
+        <div class="matrix-cell matrix-brand">Glovo</div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt status-done">PDT×3</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">DNS</span>
+          <span class="exp-badge otx">ETA</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">ETA×2</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge otx">Track</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge otx status-cancelled">ETA fmt</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge dtm">DTM×2</span>
+          <span class="exp-badge otx">DNS</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge ept">EPT×2</span>
+          <span class="exp-badge otx">ETA fmt</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge dtm">OEC</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx status-inprogress">Multi</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge dtm">DTM</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+
+        <!-- Talabat -->
+        <div class="matrix-cell matrix-brand">Talabat</div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt status-done">PDT×3</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">Routes</span>
+          <span class="exp-badge otx">ETA×3</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">DNS</span>
+          <span class="exp-badge otx">ETA</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">Jump</span>
+          <span class="exp-badge otx">DNS</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT×2</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge dtm">DTM</span>
+          <span class="exp-badge otx">Stab</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge ept">EPT</span>
+          <span class="exp-badge otx">Jump</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx status-inprogress">Stab+</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge ept">EPT</span>
+          <span class="exp-badge dtm">DTM</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+
+        <!-- HungerStation -->
+        <div class="matrix-cell matrix-brand">HungerStation</div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt status-done">PDT×3</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">Routes</span>
+          <span class="exp-badge otx">DNS</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">ETA×3</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">Jump</span>
+          <span class="exp-badge otx status-cancelled">DNS</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">DNS×2</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge dtm">DTM×2</span>
+          <span class="exp-badge otx">DNS</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">Saver</span>
+          <span class="exp-badge ept">EPT</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge dtm">OEC</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx status-inprogress">Jump+</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge ept">EPT</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+
+        <!-- Efood -->
+        <div class="matrix-cell matrix-brand">Efood</div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt status-done">PDT×3</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">ETA×4</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx">ETA×2</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge pdt">PDT</span>
+          <span class="exp-badge otx status-cancelled">ETA fmt</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge dtm">DTM</span>
+          <span class="exp-badge otx">Stab</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge ept">EPT</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell empty"></div>
+        <div class="matrix-cell">
+          <span class="exp-badge otx status-inprogress">Stab+</span>
+        </div>
+        <div class="matrix-cell">
+          <span class="exp-badge dtm">DTM</span>
+        </div>
+        <div class="matrix-cell empty"></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Note:</strong> All 50 experiments are global/centralized initiatives tested across all Seamless platforms (Pandora, Glovo, Talabat, HungerStation, Efood). Topics are color-coded: <strong style="color: #0C447C;">PDT Ranges</strong> (delivery time), <strong style="color: #3B6D11;">EPT Quantiles</strong>, <strong style="color: #633806;">EPT Model Improvements</strong> (DTM v4), <strong style="color: #085041;">OTX</strong> (tracking experience).
+    </div>
+
+    <div class="insights">
+      <h2>Key Insights</h2>
+      <ul>
+        <li><strong>Unified Pipeline:</strong> All 5 brands run the same centralized experiment suite. No brand-specific variations in Q3.</li>
+        <li><strong>Early Foundation (W27–W33):</strong> PDT ranges (3 done), Route distance + boosted trees, Jump Station tests establish baselines across all brands.</li>
+        <li><strong>Parallel Tracks (W32–W35):</strong> DNS impact testing begins (later cancelled), ETA format experiments, model improvements ramp.</li>
+        <li><strong>Peak Deployment (W36–W40):</strong> EPT quantiles in Food vertical, DTM v4 validation, Central Stabilization ongoing—impacts all 5 brands simultaneously.</li>
+        <li><strong>Late-Q3 Extensions (W40+):</strong> Successful tests extended; 2 in-progress experiments continue beyond quarter for all platforms.</li>
+        <li><strong>Cancel Rate: 20%</strong> — DNS (blocked by PY conflict), ETA format (multiple variants collapsed into winners) drive consolidation.</li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e0e0e0; color: #999; font-size: 12px;">
+      <p>Generated from Q3 2025 experiments spreadsheet • Central experiment rollout to all Seamless brands</p>
+    </div>
+  </div>
+</body>
+</html>

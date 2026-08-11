@@ -1,0 +1,36 @@
+User Segmentation Across CPL Products
+Review Current State and Future Expectations
+________________
+
+
+Why This Topic
+User segmentation is one of the most discussed concepts in product strategy, but CPL has no shared, operational definition of what it means — and no consistent picture of how it should work across Choice, Seamless, and Pricing.
+Each pillar currently makes decisions that implicitly assume who the customer is. But those assumptions are not aligned. A first-time customer gets the same pricing logic as a loyal high-frequency user. A Q-commerce-only customer gets delivery defaults built for restaurant order windows. A churned user who ordered twice a week sees the same vendor ranking as an active one. The experience is not wrong — it is just not calibrated.
+The data gap is not about signal volume. CPL has extensive customer data across all three pillars. The gap is that those signals do not converge into a shared customer view — one that all three pillars read from consistently at the moment of interaction.
+________________
+
+
+The Working Model: Segment-Aware CPL
+CPL's job is to convert occasions into orders and orders into habits. But the customer behind each occasion varies widely in frequency, vertical mix, price sensitivity, and time tolerance. A segmentation model that is shared across pillars would let CPL respond to who the customer actually is, not a generic average.
+That is the CPL segmentation loop:
+Occasion arises → who is this customer (segment) → Choice responds with the right vendors → Seamless responds with the right speed promise → Pricing responds with the right fee → customer satisfied → next occasion: reinforced or recovered
+The three inputs a shared segment model would define are:
+Who the customer is — behavioral profile built from frequency, recency, vertical mix, and order value across all CPL touchpoints.
+What they expect — speed tolerance, price sensitivity, assortment needs, and trust threshold by segment.
+How CPL should respond — vendor ranking logic in Choice, delivery SLA defaults in Seamless, fee and discount logic in Pricing.
+Currently, each pillar holds a partial picture. Choice knows vendor preference. Seamless knows delivery behavior. Pricing knows spend patterns. None of these converge at the moment a customer opens the app. The result is a CPL experience that is often accurate within a pillar and misaligned across them.
+________________
+
+
+What Would We Cover
+Three questions structure the session:
+What segmentation exists today across each CPL pillar? Each team shares the customer signals they currently act on — explicitly through models or implicitly through defaults — and where those signals come from. This surfaces what each pillar knows, where the blind spots are, and where the same customer looks different depending on which pillar is describing them.
+Where does the absence of shared segmentation create misaligned or missed outcomes? We look at concrete cases where the CPL experience does not match the customer profile. A few examples:
+* Activation vs. retention pricing: does Pricing have levers for first-order subsidies or frequency incentives by segment, and are they being activated deliberately or left to chance?
+* Recovery in Choice: does vendor ranking have any signal from churn risk or recency drop-off, or does a customer who stopped ordering three weeks ago see the same slate as one who ordered yesterday?
+* Vertical-specific speed expectations: a customer ordering fever medicine at midnight has a different tolerance for wait time than one ordering a restaurant meal at noon. Is Seamless differentiating by vertical, customer type, or both?
+What would a shared CPL segmentation framework look like, and what does it unlock? This is where we move from diagnosis to design. A shared model creates concrete requirements across all three pillars:
+* Segment definition: who owns the taxonomy, what signals are inputs, how frequently segments update, and what the threshold is for re-classification.
+* Cross-pillar reads: how Choice, Seamless, and Pricing access segment state at the moment of a customer interaction — without creating latency or consistency problems.
+* Experimentation: how we test segment-specific experiences without creating conflicting signals between pillars or violating user expectations mid-session.
+* Future verticals: as CPL expands occasion coverage into new categories, new customer types will emerge. The segmentation model needs to accommodate them by design — not retroactively after the expansion has already shipped.

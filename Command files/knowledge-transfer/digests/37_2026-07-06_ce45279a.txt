@@ -1,0 +1,2 @@
+USER: List the exact tool names available to you that start with "mcp__plugin_slack_slack" or "mcp__slack". If none are available, reply with exactly NONE. Do not call any tool; only list names.
+ASSISTANT: NONE

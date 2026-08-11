@@ -1,0 +1,119 @@
+﻿[DRAFT] CPL Berlin Connect — Panel: User Segmentation [ New Customers, Subscribers, High Churn Customers]
+Moderators: Giovanna Baltazar & Harnoor Chahal
+Event: CPL Berlin Connect, June 2026
+Duration: 1 hr
+1. Panel goal
+Align on a future direction of levers on CPL level to drive personalized/elevated experience for User Segments
+
+
+Proposed Structure:
+* A quick view on different user segments and their personalisation today while highlighting missing gaps
+* Focus discussions around:
+   1. New Customers [12 mins + 10]
+   2. Subscribers/Pro customers [12 mins + 10]
+   3. High Churn Users [12 mins +10]
+   4. Other user segments[a]
+      1. High Intent Customers [ Bonus if time allows]
+
+
+2. Format (60 min)
+* [5 mins] 0–5 min — Moderators open
+   * Expectations: frame the topic, set rules
+* [18 mins] 5–23 min — Each platform's perspective: ~3 min each (6 platforms)
+   * Expectations: Share the table prepared by them
+* [10 mins] 23 - 34 mins : Deepdive into New Customers
+   * Expectations: Panelists can trigger questions or we trigger a conversation based on the questions below. Panelists discuss and align
+* [10 mins] 34 - 45 mins : Deepdive into Subscribers/Pro customers
+   * Expectations: Panelists can trigger questions or we trigger a conversation based on the questions below. Panelists discuss and align
+* [10 mins] 44 - 56 mins : Deepdive into Subscribers/Pro customers
+   * Expectations: Panelists can trigger questions or we trigger a conversation based on the questions below. Panelists discuss and align
+* [4 mins] 56 - 50 mins : Wrap-Up
+   * Hug bye bye 
+
+
+
+
+3. Panelists
+Should have an Ops person along with someone representing Pricing
+
+
+
+
+Platform
+	Primary picks
+	Pandora (foodpanda + Foodora + Yemeksepeti)
+	G. Charleton
+	Talabat
+	Khee Lim
+	PeYa (PedidosYa)
+	Constanza Gaset
+	HungerStation
+	Nashmi Aljared
+	Glovo
+	Daniela Pinho
+	efood (+ Foody)
+	Dionysia Kouvari (efood/Foody, Pricing)
+	
+
+
+
+4. Note-taker
+Proposal: Uri Alarcon (Group Product Manager)[b]
+Already involved in CPL Connect prep as co-moderator for the Delivery Types, so context-aware and outside this panel's moderator pair. To confirm with Uri.
+
+
+5. Pre-work (sent to panelists ≥1 week before the session)
+Recommended pre-work for panelists. Each panelist comes with a 1-pager doc (for their own reference when discussing) covering:
+
+
+Gio & Harnoor:
+* Prepare the grid template 
+* Prepare the scoring  template 
+* List down all user segments/personas
+* List examples of levers:
+   1. [Seamless] Lower PDT range bounds
+   2. [Seamless] Different formats
+   3. [Choice] Extended Search
+   4. [Choice] Extended DAs
+   5. [Pricing] Free Delivery
+   6. [Pricing] Free Prio Delivery
+   7. [Rider] Reduced Delivery Times
+
+
+Platforms:
+* Rate the segments 
+* List Goal for segments : CVR, User Experience [ low Fails, No contact, no sessions, no late, high NPS] 
+* Fill grid - grid template here 
+
+
+
+
+6. Guiding questions[c]
+Block A — New Customers (~10 min)
+* Is prioritised delivery the same as giving free prio delivery?
+* Which is the most expensive lever in CPL?
+Block B — Customer choice: default vs opt-in, transparent pricing (~10 min)
+* Block C — Future delivery types (~10 min)
+* Open Q&A (15+ min)
+Moderators take audience questions. If energy dips, fall-back prompts:
+* If we had to standardize one delivery type definition across CPL tomorrow, which would you pick and why?[d]
+* What is the one piece of data you wish you had to make better delivery-type decisions?
+7. Pre-session checklist
+* Confirm panelists (target: 28 May)
+* Align with Azu on opening framing + roles (who opens, who leads each block)
+* Send pre-work template to panelists (target: 29 May)
+* Confirm note-taker
+* Collect 1-pagers from panelists (1 week before event)
+* Share final guiding questions with panelists (3 days before)
+
+
+8. Outputs & follow-ups
+* Note-taker delivers a synthesis doc to moderators within 48h of the session
+* Moderators distill 3–5 convergence proposals / action items
+* Share outcomes in relevant channels
+
+
+[a]To check with Gio if mire to be added.
+[b]or Florian Sauter
+[c]@harnoor.chahal@deliveryhero.com
+[d]suggest removing, this is on delivery types panel

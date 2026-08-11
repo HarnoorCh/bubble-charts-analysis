@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The next PDT model feature is… — PDTs are cool</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#ffffff;--panel:#ffffff;--panel2:#f8fafc;--ink:#131732;--muted:#6b7280;
+    --line:#e5e7eb;--brand:#131732;--accent:#d61f26;--good:#15803d;--bad:#b91c1c;
+    --gold:#fde68a;--soft:#eef2ff;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;}
+
+  /* ---------- top nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+    backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line);}
+  .nav .inner{max-width:1180px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;gap:18px;}
+  .nav img{height:30px;}
+  .nav .brandtxt{font-weight:700;color:var(--brand);font-size:15px;letter-spacing:.01em;}
+  .nav .links{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;}
+  .nav a{color:var(--muted);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:8px;}
+  .nav a:hover{color:var(--brand);background:var(--panel2);}
+
+  /* ---------- hero ---------- */
+  .hero{background:linear-gradient(150deg,#131732 0%,#1d2347 55%,#2a1830 100%);color:#fff;
+    padding:84px 22px 76px;text-align:center;position:relative;overflow:hidden;}
+  .hero:after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;
+    background:radial-gradient(circle,rgba(214,31,38,.45),transparent 65%);}
+  .hero .kicker{display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:#ffd9db;background:rgba(214,31,38,.22);padding:6px 14px;border-radius:999px;
+    border:1px solid rgba(214,31,38,.45);}
+  .hero h1{font-size:52px;margin:18px 0 8px;line-height:1.05;}
+  .hero h1 .red{color:#ff5b62;}
+  .hero p.sub{font-size:19px;color:#c7cbe6;max-width:680px;margin:0 auto;}
+  .hero .scroll{margin-top:30px;display:inline-flex;gap:8px;align-items:center;color:#fff;
+    text-decoration:none;font-size:14px;border:1px solid rgba(255,255,255,.35);padding:10px 18px;border-radius:999px;}
+  .hero .scroll:hover{background:rgba(255,255,255,.1);}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px;}
+  section{padding:48px 0;border-bottom:1px solid var(--line);}
+  .eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px;}
+  .eyebrow .num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;
+    border-radius:7px;background:var(--accent);color:#fff;font-size:12px;}
+  h2.sec{font-size:30px;margin:0 0 14px;color:var(--brand);}
+  p.lead{font-size:17px;color:#374151;max-width:760px;}
+
+  /* ---------- cards / grid ---------- */
+  .grid{display:grid;gap:18px;margin-top:26px;}
+  .g4{grid-template-columns:repeat(4,1fr);}
+  .g3{grid-template-columns:repeat(3,1fr);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+
+  /* ---------- at-a-glance summary ---------- */
+  .summary{background:linear-gradient(150deg,#131732,#1d2347);border-radius:16px;padding:24px;margin-top:18px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;overflow:hidden;}
+  .summary .cell{background:transparent;padding:6px 18px;border-left:1px solid rgba(255,255,255,.12);}
+  .summary .cell:first-child{border-left:none;}
+  .summary .t{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#ff8a8f;font-weight:700;margin-bottom:8px;}
+  .summary .cell p{color:#dfe2f2;font-size:13.5px;line-height:1.55;margin:0;}
+  .summary .cell p b{color:#fff;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;
+    box-shadow:0 1px 2px rgba(19,23,50,.04);}
+  .card h3{margin:0 0 6px;font-size:16px;color:var(--brand);}
+  .card p{margin:0;font-size:14px;color:var(--muted);}
+  .step{position:relative;padding-left:20px;}
+  .step:before{content:"";position:absolute;left:0;top:4px;bottom:4px;width:4px;border-radius:4px;background:var(--accent);}
+
+  /* ---------- team ---------- */
+  .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:24px;}
+  .member{text-align:center;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:22px 14px;}
+  .avatar{width:84px;height:84px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;
+    justify-content:center;font-weight:700;font-size:26px;color:#fff;overflow:hidden;
+    background:linear-gradient(135deg,#131732,#d61f26);box-shadow:0 2px 6px rgba(19,23,50,.15);}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+  .member b{display:block;color:var(--brand);}
+  .member span{font-size:12.5px;color:var(--muted);}
+
+  /* ---------- stat callout ---------- */
+  .statbar{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px;}
+  .stat{background:linear-gradient(160deg,#fff, #f8fafc);border:1px solid var(--line);
+    border-left:5px solid var(--accent);border-radius:12px;padding:20px;}
+  .stat .big{font-size:38px;font-weight:800;color:var(--brand);line-height:1;}
+  .stat .big.red{color:var(--accent);}
+  .stat .lbl{font-size:13px;color:var(--muted);margin-top:8px;}
+
+  /* ---------- chart ---------- */
+  .chartwrap{margin-top:26px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;}
+  .chartwrap .cap{font-size:12.5px;color:var(--muted);margin-top:10px;}
+  .chartwrap h3{margin:0 0 8px;font-size:15px;color:var(--brand);}
+  .chartbox{position:relative;height:340px;}
+
+  /* ---------- dashboard-style comparison table ---------- */
+  .note{font-size:13px;color:var(--muted);margin:26px 0 6px;}
+  .note a{color:var(--accent);text-decoration:none;}
+  table.cmp{width:100%;border-collapse:collapse;font-size:13px;}
+  table.cmp th,table.cmp td{padding:7px 9px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;}
+  table.cmp th:first-child,table.cmp td:first-child,table.cmp th:nth-child(2),table.cmp td:nth-child(2){text-align:left;}
+  table.cmp thead th{color:var(--muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;}
+  table.cmp tbody tr:hover{background:var(--panel2);}
+  .delta.bad{color:var(--bad);font-weight:600;}
+  .delta.good{color:var(--good);font-weight:600;}
+
+  /* ---------- collapsible detail ---------- */
+  details.more{border:1px solid var(--line);border-radius:12px;margin-top:14px;background:var(--panel);}
+  details.more>summary{cursor:pointer;padding:14px 18px;font-weight:600;color:var(--brand);font-size:14px;list-style:none;}
+  details.more>summary::-webkit-details-marker{display:none;}
+  details.more>summary:before{content:"▸";color:var(--accent);margin-right:8px;}
+  details.more[open]>summary:before{content:"▾";}
+  details.more .body{padding:2px 18px 20px;}
+
+  /* ---------- placeholder marker ---------- */
+  .ph{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;color:#92400e;background:#fef3c7;
+    border:1px solid #fcd34d;border-radius:999px;padding:4px 11px;}
+  .ph.dot:before{content:"";width:7px;height:7px;border-radius:50%;background:#f59e0b;}
+
+  /* ---------- dashboard embed ---------- */
+  .frame{margin-top:24px;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    box-shadow:0 6px 24px rgba(19,23,50,.08);}
+  .frame .bar{display:flex;align-items:center;gap:8px;padding:9px 14px;background:var(--brand);color:#fff;font-size:13px;}
+  .frame .bar .dots{display:flex;gap:6px;}
+  .frame .bar .dots i{width:10px;height:10px;border-radius:50%;display:inline-block;}
+  .frame .bar a{margin-left:auto;color:#fff;text-decoration:none;font-size:12.5px;
+    border:1px solid rgba(255,255,255,.4);padding:5px 12px;border-radius:8px;}
+  .frame .bar a:hover{background:rgba(255,255,255,.12);}
+  iframe{width:100%;height:680px;border:0;display:block;background:#fff;}
+
+  /* ---------- results blank ---------- */
+  .results-blank{margin-top:24px;border:2px dashed var(--line);border-radius:16px;
+    min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;color:var(--muted);background:repeating-linear-gradient(45deg,#fbfcff,#fbfcff 14px,#f4f6fb 14px,#f4f6fb 28px);}
+  .results-blank .big{font-size:20px;color:var(--brand);font-weight:700;margin-bottom:6px;}
+
+  .outro{background:linear-gradient(150deg,#131732 0%,#1d2347 55%,#2a1830 100%);color:#fff;
+    text-align:center;padding:70px 22px;}
+  .outro p{margin:0;font-size:40px;font-weight:800;line-height:1.15;}
+  .outro .red{color:#ff5b62;}
+  @media(max-width:880px){ .outro p{font-size:30px;} }
+  footer{padding:34px 22px;text-align:center;color:var(--muted);font-size:13px;}
+  footer b{color:var(--brand);}
+
+  /* ---------- print / PDF ---------- */
+  @media print{
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .nav{display:none;}
+    section{padding:30px 0;break-inside:avoid;}
+    .hero{padding:50px 22px;}
+    /* force collapsed <details> open in the PDF */
+    details.more{break-inside:avoid;}
+    details.more:not([open])>*:not(summary){display:block!important;}
+    details.more>summary:before{content:"▾";}
+    .chartwrap,.card,.stat,.member{break-inside:avoid;}
+    /* the live dashboard iframe doesn't print well — show a note instead */
+    iframe{display:none;}
+    .frame{break-inside:avoid;}
+    .frame:after{content:"Interactive dashboard — view live at predict-timing-unveiled.ngrok-free.dev/country_ranking_dashboard.html";
+      display:block;padding:22px 18px;color:var(--muted);font-size:13px;text-align:center;}
+  }
+
+  @media(max-width:880px){
+    .g4,.g3,.g2,.team,.statbar,.summary{grid-template-columns:1fr;}
+    .summary .cell{border-left:none;border-top:1px solid rgba(255,255,255,.12);padding:14px 6px;}
+    .summary .cell:first-child{border-top:none;}
+    .hero h1{font-size:38px;}
+    .nav .brandtxt{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav">
+  <div class="inner">
+    <img src="cpl-logo.png" alt="CPL">
+    <span class="brandtxt">PDTs are cool</span>
+    <div class="links">
+      <a href="#tldr">Summary</a>
+      <a href="#team">Team</a>
+      <a href="#problem">Problem</a>
+      <a href="#features">Features</a>
+      <a href="#correlation">Correlation</a>
+      <a href="#markets">Markets</a>
+      <a href="#simulation">Simulation</a>
+      <a href="#results">Results</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <span class="kicker">Hackathon Project</span>
+  <h1>The next PDT<br>model feature <span class="red">is…</span></h1>
+  <p class="sub">Stacked orders quietly bend the promise we make to customers. Team <b style="color:#fff">“PDTs are cool”</b> set out to find the features that explain it — and the markets where it matters most.</p>
+  <a class="scroll" href="#team">Meet the team ↓</a>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== 1. TEAM ===== -->
+  <section id="team">
+    <div class="eyebrow"><span class="num">1</span> The Team</div>
+    <h2 class="sec">PDTs are cool</h2>
+    <p class="lead">A cross-functional squad obsessed with one number customers actually feel: the
+      <b>Promised / Predicted Delivery Time</b>. We came together for the hackathon to make that
+      number honest for the hardest case — stacked orders.</p>
+
+    <div class="team">
+      <div class="member"><div class="avatar"><img src="team_harnoor.jpg" alt="Harnoor Chahal"></div><b>Harnoor Chahal</b><span>Analysis &amp; presentation</span></div>
+      <div class="member"><div class="avatar"><img src="team_zhamal.jpg" alt="Zhamal Toktamysova"></div><b>Zhamal Toktamysova</b><span>DTM simulations</span></div>
+      <div class="member"><div class="avatar"><img src="team_dongin.jpg" alt="Dongin Kim"></div><b>Dongin Kim</b><span>DTM model &amp; architecture</span></div>
+      <div class="member"><div class="avatar"><img src="team_asher.jpg" alt="Asher Nehemiah"></div><b>Asher Nehemiah</b><span>Offline analysis · Talabat</span></div>
+      <div class="member"><div class="avatar"><img src="team_grigoris.jpg" alt="Grigoris Xenikakis"></div><b>Grigoris Xenikakis</b><span>Presentation · e-food</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 2. PROBLEM ===== -->
+  <section id="problem">
+    <div class="eyebrow"><span class="num">2</span> The Problem</div>
+
+    <div class="card" style="border-left:5px solid var(--accent);background:#fff7f7;margin-bottom:22px">
+      <h3>Why stacked orders?</h3>
+      <p style="font-size:15px;color:#374151;line-height:1.7">
+        Stacking is <b>~20% of global orders</b> and an important lever for profitability. Yet
+        <b>high lateness</b> is one of the reasons — among others — that we don't stack to the
+        highest potential.</p>
+    </div>
+
+    <h2 class="sec">Stacked orders break the PDT promise</h2>
+    <p class="lead">When a rider carries two (or more) orders at once — a <b>stacked order</b> — the
+      delivery the customer was promised competes with someone else's. The result: stacked orders
+      arrive on time far less often than non-stacked ones. We measured the gap globally for Q1.</p>
+
+    <div class="statbar">
+      <div class="stat">
+        <div class="big">80.6%</div>
+        <div class="lbl">On-time rate · <b>non-stacked</b> orders · 401.2M orders</div>
+      </div>
+      <div class="stat">
+        <div class="big red">70.1%</div>
+        <div class="lbl">On-time rate · <b>stacked</b> orders · 155.0M orders</div>
+      </div>
+      <div class="stat">
+        <div class="big red">−10.4 pp</div>
+        <div class="lbl">On-time <b>gap</b> — stacked orders are ~10pp less likely to be on time</div>
+      </div>
+    </div>
+
+    <p class="note">Top 10 markets by the country-ranking dashboard's <b>default ranking</b> —
+      stacked (<span style="color:var(--accent)">red</span>) vs non-stacked
+      (<span style="color:var(--brand)">navy</span>).
+      <a href="country_ranking_dashboard.html" target="_blank">see the live dashboard ↗</a></p>
+
+    <div class="grid g2">
+      <div class="chartwrap">
+        <h3>% on-time (±10 min)</h3>
+        <div class="chartbox"><canvas id="cmpOt"></canvas></div>
+      </div>
+      <div class="chartwrap">
+        <h3>Delivery time (min)</h3>
+        <div class="chartbox"><canvas id="cmpDt"></canvas></div>
+      </div>
+    </div>
+
+    <div class="chartwrap" style="overflow-x:auto">
+      <table class="cmp" id="cmpTable"></table>
+      <div class="cap"><b>Source:</b> country-ranking dashboard data (<code>cl.orders</code>,
+        trailing 30 days) — same numbers shown in the embedded dashboard's “Stacked vs non-stacked”
+        tab. Δ = stacked − non-stacked; <span class="delta bad">red</span> = stacked performs worse.
+        Global headline figures above are Q1 2026.</div>
+    </div>
+  </section>
+
+  <!-- ===== 3. FEATURE IDENTIFICATION ===== -->
+  <section id="features">
+    <div class="eyebrow"><span class="num">3</span> How we found the features</div>
+    <h2 class="sec">From model internals to the street</h2>
+    <p class="lead">We worked top-down from the model, then bottom-up from operational reality —
+      and met in the middle on the features that actually move stacked-order PDTs.</p>
+
+    <div class="grid g3">
+      <div class="card step">
+        <h3>1 · Review the model structure</h3>
+        <p>Sat down with our DTM owners <b>Dongin</b> and <b>Zhamal</b> to walk the current
+          production architecture and the features used in its sub-models — and to find where
+          stacked orders are (and aren't) represented.</p>
+      </div>
+      <div class="card step">
+        <h3>2 · Break down the operations</h3>
+        <p>Decomposed the problem into operational knowledge, focusing hardest on
+          <b>dispatching</b> and <b>rider issues</b> — the two levers most tied to stacking.</p>
+      </div>
+      <div class="card step">
+        <h3>3 · Talk to our rider friends</h3>
+        <p>Filled up our knowledge gaps by talking to our friends in <b>rider operations</b> —
+          ground-truthing our hypotheses against what actually happens on a stacked trip:
+          acceptance, wait, and hand-off frictions.</p>
+      </div>
+    </div>
+
+    <h3 style="margin:36px 0 6px;color:var(--brand);font-size:18px">The feature long-list</h3>
+    <p style="font-size:14px;color:var(--muted);max-width:760px;margin:0 0 4px">
+      Whiteboarding the delivery journey end-to-end, we mapped candidate features stage by stage —
+      then zeroed in on the dispatch/rider levers (and ultimately <b>Δ CPU</b>).</p>
+
+    <div class="grid g3" style="margin-top:18px">
+      <div class="card">
+        <h3>🍳 Vendor &amp; prep (EPT)</h3>
+        <p style="line-height:1.9">
+          Estimated prep time<br>Vendor restrictions<br>Order locale at vendor<br>
+          Stacking rate / zone density at vendor</p>
+      </div>
+      <div class="card">
+        <h3>🛍️ Pickup</h3>
+        <p style="line-height:1.9">
+          Building access / “walls”<br>Foot traffic at vendor<br>Map &amp; routing (Google) signals</p>
+      </div>
+      <div class="card">
+        <h3>🛵 Driving</h3>
+        <p style="line-height:1.9">
+          Traffic on the line<br>Distance to customer<br>Speed of vehicle / vehicle type<br>
+          Special errands &amp; detours</p>
+      </div>
+      <div class="card">
+        <h3>🏠 At customer</h3>
+        <p style="line-height:1.9">
+          Near-customer time<br>Walk-in time<br>Walk-out time at customer</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent)">
+        <h3>🧭 Dispatch &amp; rider <span style="font-size:11px;color:var(--accent)">★ focus</span></h3>
+        <p style="line-height:1.9">
+          Dispatch time<br><b>Rider acceptance time</b><br>Rider acceptance rate = f(accept time)<br>
+          Mean delay per zone<br>On-break / available riders</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--accent);background:#fff7f7">
+        <h3>⚡ The pick: Δ CPU <span style="font-size:11px;color:var(--accent)">★ tested</span></h3>
+        <p style="line-height:1.9">
+          Gap between two orders’ committed pickup times — the same signal the dispatcher already
+          uses to gate stacking, but invisible to today’s PDT model. <i>(See §4.)</i></p>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px">Source: team whiteboard (IMG&nbsp;7172).</p>
+  </section>
+
+  <!-- ===== 4. CORRELATION ===== -->
+  <section id="correlation">
+    <div class="eyebrow"><span class="num">4</span> The signal we found</div>
+    <h2 class="sec">Rider acceptance time &amp; the Δ CPU penalty</h2>
+    <p class="lead">Two things pointed us at the dispatch layer. First, riders take measurably
+      <b>longer to accept stacked orders</b>. Second, the dispatcher already gates stacking on
+      <b>Δ CPU</b> — a signal today's PDT model never sees.</p>
+
+    <div class="grid g2">
+      <div class="chartwrap">
+        <div class="chartbox"><canvas id="accChart"></canvas></div>
+        <div class="cap"><b>Source:</b> <code>cl.orders</code> · <code>rider_reaction_time</code>,
+          Q1 2026 global, completed non-pre-order orders. Stacked orders take <b>+1.2s (+22%)</b>
+          longer to accept on average.</div>
+      </div>
+      <div class="card" style="border-left:5px solid var(--accent)">
+        <h3>What is the Δ CPU penalty?</h3>
+        <p style="font-size:14px;color:#374151;line-height:1.7">
+          <b>CPU = Committed Pick-Up time</b> — when a rider is committed to collect an order.
+          <b>Δ CPU</b> is the gap between the committed pickup times of two orders the algorithm is
+          considering stacking together.</p>
+        <p style="font-size:14px;color:#374151;line-height:1.7;margin-top:10px">
+          Dispatch only stacks them when <b>Δ CPU ≤ a max threshold (~4 min)</b>; beyond that, a
+          penalty blocks the stack so a rider isn't sent to wait too long at the second vendor.</p>
+        <div style="margin-top:12px;background:var(--panel2);border:1px solid var(--line);
+          border-radius:10px;padding:12px;font-size:13px;color:#374151">
+          <b>Example.</b> Order&nbsp;1 committed PU 10:15, Order&nbsp;2 10:20 → Δ CPU = 5 min →
+          <b style="color:var(--bad)">no stack</b>. Once Order&nbsp;1 is at vendor (10:16),
+          Δ CPU = 4 min → <b style="color:var(--good)">stack allowed</b>.
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">
+          Source: LOGRO Squad Update — <i>MaxDeltaCPU</i> dispatch constraint. The dispatcher acts on
+          Δ CPU; the PDT model doesn't — which is the gap we set out to close.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. MARKET SELECTION ===== -->
+  <section id="markets">
+    <div class="eyebrow"><span class="num">5</span> Selecting markets</div>
+    <h2 class="sec">Where to act first</h2>
+    <p class="lead">To pick where stacked-order PDT fixes would pay off most, we built a live
+      <b>country ranking dashboard</b> — a weighted rank-sum over KPI signals you can toggle in the
+      browser. It re-ranks instantly, no re-query needed. The shortlist it produced:
+      <b>gv-hr, gv-ci, gv-bg, gv-me, gv-ba, gt</b>.</p>
+
+    <div class="frame">
+      <div class="bar">
+        <span class="dots"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></span>
+        <span>Country Ranking Dashboard</span>
+        <a href="country_ranking_dashboard.html" target="_blank">Open full dashboard ↗</a>
+      </div>
+      <iframe src="country_ranking_dashboard.html" title="Country Ranking Dashboard" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- ===== 6. SIMULATION ===== -->
+  <section id="simulation">
+    <div class="eyebrow"><span class="num">6</span> Simulation</div>
+    <h2 class="sec">We put it in code</h2>
+    <p class="lead">With the features and target markets in hand, we trained the DTM with our candidate
+      features against a control, on a dedicated <code>cpl-hackathon</code> branch, and ran an offline
+      evaluation. We coded and tested <b>two features in parallel — Δ CPU and rider acceptance</b>.</p>
+
+    <div class="grid g3">
+      <div class="card"><h3>Inputs</h3><p>Two candidate features — <b>Δ CPU</b> and <b>rider acceptance</b> — each vs. the control model, across the target markets (gv-hr, gv-ci, gv-bg, gv-me, gv-ba, gt).</p></div>
+      <div class="card"><h3>Method</h3><p>Trained on Metaflow — 1-month window, execution date 2026-05-20 — one branch per feature, each compared against the control models offline.</p></div>
+      <div class="card"><h3>Output</h3><p>Change in stacked vs. non-stacked PDT accuracy / on-time per feature — so we could see which one actually earns its place.</p></div>
+    </div>
+    <h3 style="margin:36px 0 6px;color:var(--brand);font-size:18px">How AI was used</h3>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card step">
+        <h3>Branch per feature</h3>
+        <p>Each candidate feature (e.g. rider-acceptance) sat on its own git branch, so we could
+          build, train, and evaluate features <b>independently and in parallel</b>, without conflicts.</p>
+      </div>
+      <div class="card step">
+        <h3>A DTM-aware agent</h3>
+        <p>On each branch we drove an AI agent wired into our DTM repo with <b>full company context</b> —
+          it knows our model structure, our BigQuery schemas, and the team's conventions. So it didn't
+          write generic code; it produced feature SQL and pipeline wiring that dropped straight into
+          our existing DTM pipeline.</p>
+      </div>
+      <div class="card step">
+        <h3>Days → hours</h3>
+        <p>Describe the idea → the agent writes the BigQuery feature, wires it into the pipeline, and
+          runs the per-country accuracy eval <b>the same way we already do it</b>.</p>
+      </div>
+    </div>
+
+    <div class="card" style="border-left:5px solid var(--accent);background:#fff7f7;margin-top:18px">
+      <h3>Summary</h3>
+      <p style="font-size:14px;color:#374151;line-height:1.9">
+        • <b>Branch per feature</b> → parallel, isolated feature dev.<br>
+        • <b>DTM-aware AI agent</b> (knows our model, BigQuery schema, conventions) → features built in
+          hours, not days.<br>
+        • <b>BigQuery end-to-end</b> → the agent builds the feature data and runs per-country evaluation
+          directly.</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:10px">
+        <b>“DTM-aware”</b> = we set up <code>CLAUDE.md</code> and AI-context docs directly in the repo,
+        so the agent reads our model, data, and conventions as built-in context.</p>
+    </div>
+  </section>
+
+  <!-- ===== 7. RESULTS (reserved) ===== -->
+  <section id="results">
+    <div class="eyebrow"><span class="num">7</span> Results</div>
+    <h2 class="sec">Δ CPU cuts the stacked-order late tail</h2>
+    <p class="lead">5 of 6 markets in. Of the two features we tested in parallel, <b>Δ CPU moved the
+      needle</b> and rider-acceptance didn't — pointing to a real GMV opportunity.</p>
+
+    <div class="statbar" style="margin-top:22px">
+      <div class="stat">
+        <div class="big" style="color:var(--good)">4 / 5</div>
+        <div class="lbl"><b>Δ CPU</b> — stacked markets with a shorter late tail (up to +5.0pp). On-time ~flat.</div>
+      </div>
+      <div class="stat">
+        <div class="big">no lift</div>
+        <div class="lbl"><b>Rider acceptance</b> — deltas within noise; dropped. Parallel testing paid off.</div>
+      </div>
+      <div class="stat">
+        <div class="big" style="color:var(--good)">≈ €5–16 Mio</div>
+        <div class="lbl">est. <b>annual GMV uplift</b> from fewer late-driven cancellations (central ~€14 Mio).</div>
+      </div>
+    </div>
+
+    <div class="chartwrap" style="margin-top:22px">
+      <h3>Δ CPU on stacked orders — on-time / late improvement (vs control, 5 markets)</h3>
+      <img src="cpu_stacked_more.png" alt="Stacked orders — On-Time / Late improvement, Δ CPU vs control, 5 markets"
+           style="width:100%;height:auto;display:block;border-radius:8px">
+      <div class="cap">Positive = better (on-time up / lateness down). Late tail improves in 4/5 markets
+        (gv-ci the exception); on-time broadly flat. Source: Metaflow <code>cpl-hackathon</code>,
+        1-month training, exec 2026-05-20 — only <b>gt</b> still running.</div>
+    </div>
+
+    <details class="more">
+      <summary>All orders — context</summary>
+      <div class="body">
+        <p style="font-size:13px;color:var(--muted);max-width:720px;margin:6px 0 12px">
+          Across all orders the effect is muted and mixed — expected, since Δ CPU is a stacking signal.
+          The clear movement shows up where it should: on stacked orders, above.</p>
+        <div class="chartwrap" style="max-width:760px;margin-top:0">
+          <img src="cpu_all_more.png" alt="All orders — On-Time / Late improvement, Δ CPU vs control, 5 markets"
+               style="width:100%;height:auto;display:block;border-radius:8px">
+          <div class="cap">All orders, 5 markets — late improvement −2.5pp (gv-ci) to +4.2pp (gv-hr);
+            on-time −3.7pp to +1.4pp.</div>
+        </div>
+      </div>
+    </details>
+
+    <details class="more">
+      <summary>Second feature tested — rider acceptance (no lift)</summary>
+      <div class="body">
+        <p style="font-size:14px;color:#374151;max-width:760px;margin:6px 0 14px;line-height:1.7">
+          Tested in parallel on gv-bg, gv-ci, gv-hr. Baseline → rider-acceptance moved metrics by only
+          <b>hundredths of a point</b> — effectively no lift, so we dropped it. That's the point of
+          branch-per-feature testing: <b>Δ CPU earned its place; rider acceptance didn't.</b></p>
+        <div class="grid g2">
+          <div class="chartwrap"><h3>Stacked orders</h3>
+            <div class="chartbox"><canvas id="riderStacked"></canvas></div>
+            <div class="cap">Baseline → rider-acceptance. Bars near zero.</div></div>
+          <div class="chartwrap"><h3>All orders</h3>
+            <div class="chartbox"><canvas id="riderOverall"></canvas></div>
+            <div class="cap">Baseline → rider-acceptance.</div></div>
+        </div>
+      </div>
+    </details>
+
+    <details class="more">
+      <summary>GMV estimate — how we get there</summary>
+      <div class="body">
+        <p style="font-size:14px;color:#374151;max-width:760px;margin:6px 0 14px">
+          Plugging the Δ CPU late-tail result into the CPL GMV back-of-envelope (2025 base:
+          <b>2.28B orders/yr</b>, <b>€13.36/order</b>, <b>0.90%</b> CX cancellation rate).</p>
+        <div class="statbar" style="margin-top:0">
+          <div class="stat">
+            <div class="big" style="color:var(--good)">≈ €5–16 Mio</div>
+            <div class="lbl"><b>annual GMV uplift</b> from fewer late-driven cancellations · central ~€14 Mio</div>
+          </div>
+          <div class="stat">
+            <div class="big">€2.7 Mio</div>
+            <div class="lbl">GMV recovered per <b>1%</b> relative cut in CX cancellations</div>
+          </div>
+          <div class="stat">
+            <div class="big">~6%</div>
+            <div class="lbl">fewer late orders implied by the <b>~1.0pp</b> late-share gain (base ≈16%)</div>
+          </div>
+        </div>
+        <div class="card" style="border-left:5px solid var(--accent);background:#fff7f7;margin-top:16px">
+          <p style="font-size:14px;color:#374151;line-height:1.9;margin:0">
+            • Δ CPU cuts the all-order late share by <b>~1.0pp</b> (5-market avg) → <b>~6% fewer late
+              orders</b> (base Late&gt;10 ≈ 16%).<br>
+            • Late deliveries drive CX cancellations; if those fall in proportion, that's a <b>2–6%</b>
+              cut in the 0.90% CX-fail rate.<br>
+            • At €13.36/order over 2.28B yearly orders, each 1% cut ≈ €2.7 Mio → <b>€5–16 Mio/yr</b>.<br>
+            • Sanity check: the model's own “better on-time &amp; late shares” assumption (5%) lands at
+              <b>€13.7 Mio</b> — near its “+15 Mio EUR GMV” headline.</p>
+          <p style="font-size:12px;color:var(--muted);margin-top:10px">
+            Back-of-envelope on the global 2025 base (Δ CPU is a rollable DTM feature), cancellation
+            lever only — excludes the retention lever (model adds ~€24 Mio). Source:
+            <i>BOE: GMV calc for CPL Top 10</i>.</p>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- ===== AT A GLANCE (summary) ===== -->
+  <section id="tldr" style="border-bottom:none">
+    <div class="eyebrow"><span class="num">★</span> At a glance</div>
+    <h2 class="sec">The one-minute version</h2>
+    <div class="summary">
+      <div class="cell">
+        <div class="t">Problem</div>
+        <p><b>Stacked orders</b> (~20% of global orders) are <b>~10pp less likely</b> to be on time —
+          70% vs 81% (Q1, global).</p>
+      </div>
+      <div class="cell">
+        <div class="t">Approach</div>
+        <p>Mapped the DTM, focused on <b>dispatch &amp; rider</b> levers, talked to riders — then tested
+          features in parallel with a <b>DTM-aware AI agent</b>.</p>
+      </div>
+      <div class="cell">
+        <div class="t">Result</div>
+        <p><b>Δ CPU</b> shortens the stacked-order <b>late tail</b> in 4 of 5 markets (up to +5pp).
+          Rider-acceptance gave no lift.</p>
+      </div>
+      <div class="cell">
+        <div class="t">Impact</div>
+        <p><b>≈ €5–16 Mio/yr</b> GMV from fewer late-driven cancellations (central ~€14 Mio).</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="outro">
+  <p>PDTs are cool,<br><span class="red">but our team is COOLER</span> 😎</p>
+</div>
+
+<footer>
+  <b>PDTs are cool</b> · Stacked Order PDT Hackathon · Customer Product Line Connect
+</footer>
+
+<script>
+  // ============================================================
+  // EDIT THESE with real numbers, then refresh the page.
+  // ============================================================
+
+  // --- Section 2: top 10 markets (dashboard default ranking) ---
+  // cc, on-time stacked/non-stacked (%), delivery time stacked/non-stacked (min).
+  const TOP10 = [{"cc":"GV-GE","ot_s":59.2,"ot_n":67.8,"dt_s":43.7,"dt_n":33.4},{"cc":"T5","ot_s":43.8,"ot_n":57.4,"dt_s":35.7,"dt_n":18.3},{"cc":"GV-HR","ot_s":60.6,"ot_n":64.6,"dt_s":42.2,"dt_n":35.0},{"cc":"GV-KZ","ot_s":58.9,"ot_n":56.3,"dt_s":41.4,"dt_n":36.0},{"cc":"BD","ot_s":59.4,"ot_n":71.1,"dt_s":45.3,"dt_n":35.8},{"cc":"GV-BA","ot_s":62.2,"ot_n":73.4,"dt_s":45.5,"dt_n":33.7},{"cc":"SG","ot_s":64.7,"ot_n":72.4,"dt_s":40.4,"dt_n":29.5},{"cc":"GT","ot_s":64.7,"ot_n":74.6,"dt_s":39.1,"dt_n":32.3},{"cc":"AT","ot_s":62.5,"ot_n":79.9,"dt_s":37.1,"dt_n":26.0},{"cc":"GV-CI","ot_s":59.8,"ot_n":73.4,"dt_s":41.7,"dt_n":32.3}];
+
+  // --- Section 4: avg rider acceptance (reaction) time, seconds ---
+  // Source: cl.orders rider_reaction_time, Q1 2026 global.
+  const accData = {
+    nonStacked: 5.4,   // sec
+    stacked:    6.6    // sec
+  };
+
+  // ============================================================
+
+  const NAVY='#131732', RED='#d61f26', MUTED='#6b7280', LINE='#e5e7eb';
+
+  // ---- top-10 grouped bars: stacked (red) vs non-stacked (navy) ----
+  function groupedBar(canvasId, sKey, nKey, yText, suffix){
+    return new Chart(document.getElementById(canvasId), {
+      type:'bar',
+      data:{labels:TOP10.map(r=>r.cc),
+        datasets:[
+          {label:'Stacked',     data:TOP10.map(r=>r[sKey]), backgroundColor:RED,  borderRadius:5},
+          {label:'Non-stacked', data:TOP10.map(r=>r[nKey]), backgroundColor:NAVY, borderRadius:5}
+        ]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:12}}},
+          tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y.toFixed(1)}${suffix}`}}},
+        scales:{y:{beginAtZero:true,title:{display:true,text:yText,color:MUTED},
+                   ticks:{color:MUTED},grid:{color:LINE}},
+                x:{ticks:{color:NAVY,font:{weight:'600',size:11}},grid:{display:false}}}}
+    });
+  }
+  groupedBar('cmpOt','ot_s','ot_n','% on-time','%');
+  groupedBar('cmpDt','dt_s','dt_n','minutes','m');
+
+  // ---- delta table (Δ = stacked − non-stacked) ----
+  (function(){
+    const d=(a,b,higherBetter)=>{
+      const diff=a-b, worse = higherBetter ? diff<0 : diff>0;
+      return `<span class="delta ${worse?'bad':'good'}">${diff>0?'+':''}${diff.toFixed(1)}</span>`;
+    };
+    let h="<thead><tr><th>#</th><th>Market</th>"+
+          "<th>On-time stk</th><th>On-time non-stk</th><th>Δ</th>"+
+          "<th>DT stk</th><th>DT non-stk</th><th>Δ</th></tr></thead><tbody>";
+    TOP10.forEach((r,i)=>{
+      h+=`<tr><td>${i+1}</td><td><b>${r.cc}</b></td>`+
+         `<td>${r.ot_s.toFixed(1)}%</td><td>${r.ot_n.toFixed(1)}%</td><td>${d(r.ot_s,r.ot_n,true)}</td>`+
+         `<td>${r.dt_s.toFixed(1)}m</td><td>${r.dt_n.toFixed(1)}m</td><td>${d(r.dt_s,r.dt_n,false)}</td></tr>`;
+    });
+    document.getElementById('cmpTable').innerHTML=h+"</tbody>";
+  })();
+
+  // ---- rider acceptance time bar chart ----
+  new Chart(document.getElementById('accChart'), {
+    type:'bar',
+    data:{
+      labels:['Non-stacked','Stacked'],
+      datasets:[{
+        label:'Avg rider acceptance time (s)',
+        data:[accData.nonStacked, accData.stacked],
+        backgroundColor:[NAVY, RED],
+        borderRadius:8, maxBarThickness:120
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        title:{display:true,text:'Avg rider acceptance time · Q1 global (seconds)',color:MUTED,font:{size:13}}},
+      scales:{y:{beginAtZero:true,ticks:{callback:v=>v+'s',color:MUTED},grid:{color:LINE}},
+              x:{ticks:{color:NAVY,font:{weight:'600'}},grid:{display:false}}}
+    }
+  });
+
+  // ---- §7 second feature: rider acceptance (baseline → RA). improvement, +ve = better.
+  //      late improvement = reduction in late% (= −Δlate10), to match the Δ CPU chart's sign. ----
+  const BLUE='#4285F4', ORANGE='#DB4437';
+  const RIDER_STACKED = [{cc:'gv-bg',ot:-0.08,late:-0.04},{cc:'gv-ci',ot:-0.16,late:-0.39},{cc:'gv-hr',ot:-0.03,late:-0.06}];
+  const RIDER_OVERALL = [{cc:'gv-bg',ot:0.04,late:-0.11},{cc:'gv-ci',ot:0.10,late:-0.02},{cc:'gv-hr',ot:-0.16,late:-0.16}];
+  function improvementBar(canvasId, rows){
+    return new Chart(document.getElementById(canvasId), {
+      type:'bar',
+      data:{labels:rows.map(r=>r.cc),datasets:[
+        {label:'on_time_improvement', data:rows.map(r=>r.ot),   backgroundColor:BLUE,   borderRadius:4},
+        {label:'late improvement',    data:rows.map(r=>r.late), backgroundColor:ORANGE, borderRadius:4}
+      ]},
+      options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:12}}},
+          tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y>0?'+':''}${c.parsed.y.toFixed(2)}pp`}}},
+        scales:{y:{suggestedMin:-1,suggestedMax:1,title:{display:true,text:'improvement (pp)',color:MUTED},
+                   ticks:{color:MUTED,callback:v=>v+'pp'},grid:{color:LINE}},
+                x:{ticks:{color:NAVY,font:{weight:'600'}},grid:{display:false}}}}
+    });
+  }
+  improvementBar('riderStacked', RIDER_STACKED);
+  improvementBar('riderOverall', RIDER_OVERALL);
+
+  // charts inside <details> render at 0px until opened — nudge them on toggle
+  document.querySelectorAll('details.more').forEach(d=>
+    d.addEventListener('toggle',()=>{ if(d.open) window.dispatchEvent(new Event('resize')); }));
+</script>
+</body>
+</html>
