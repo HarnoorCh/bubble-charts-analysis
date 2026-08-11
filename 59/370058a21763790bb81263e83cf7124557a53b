@@ -1,0 +1,348 @@
+seamless-reports/report-2026W30.md
+  s_f36243373575de::t_c48109a367ace3 9
+  s_f36243373575de::t_90f06bef2f6bd5 1-4,8,20-21,25-26,32,34-36
+  s_f36243373575de::t_2aeca029c0e7d5 5-7,10-19,22-24,27-31,33,37
+seamless-reports/.state/sent-2026W30.ok
+  s_f36243373575de::t_f97ed03123f596 1
+.gitignore
+  s_2d193756014623::t_58373daf3a3eb9 1-5
+seamless-reports/report-2026W31.md
+  s_f36243373575de::t_383bcf0ba480a6 1-49
+  s_6a9758be0687e9::t_c31b6c51856dfa 50
+seamless-reports/.state/sent-2026W31.ok
+  s_6a9758be0687e9::t_88a49a8f1828b4 1
+seamless-reports/.state/sent-2026W32.ok
+  s_3b013565e0e1c7::t_c744f15fba5f36 1
+seamless-reports/report-2026W32.md
+  s_3b013565e0e1c7::t_ea3254fb58fa47 1-50
+2026-04-20-140024-is-there-a-trend-in-the-dt-column.txt
+  s_f36243373575de::t_17823003526aa4 1-84
+2026-06-10_PT_pelican_shops_global.sql
+  s_f36243373575de::t_419400e389335a 1-514
+"Command files/BigQuery-Analysis-Onboarding-for-Uri.md"
+  s_f36243373575de::t_fedc7b63bc4f81 1-237
+"Command files/Cycle Review/SETUP.md"
+  s_f36243373575de::t_8ea7f6ea8e0de9 1-137
+"Command files/Cycle Review/SKILL.md"
+  s_f36243373575de::t_11725a1bcd0917 1-282
+"Command files/DART-v1.md"
+  s_f36243373575de::t_9d97aacd57bfcb 1-530
+"Command files/Memory/ONBOARDING.md"
+  s_f36243373575de::t_5405961880c939 1-114
+"Command files/Quarterly Update/SETUP.md"
+  s_f36243373575de::t_f7f6c6ae5403a4 1-114
+"Command files/Quarterly Update/SKILL.md"
+  s_f36243373575de::t_67feafab1d2c36 1-165
+"Command files/Seamless Base Query.md"
+  s_f36243373575de::t_c1ce5308281e02 1-124
+"Command files/Seamless Experimentation/implementation.env.txt"
+  s_f36243373575de::t_2f66f7dbd429bd 1-10
+"Command files/Seamless domain Update/SKILL.md"
+  s_f36243373575de::t_379b20d60b34dd 1-312
+"Command files/biweekly-update.md"
+  s_f36243373575de::t_982fbd73a60460 1-177
+"Command files/country-ranking-dashboard/README.md"
+  s_f36243373575de::t_85b1cd3bbb9683 1-85
+"Command files/country-ranking-dashboard/build_dashboard.py"
+  s_f36243373575de::t_6668b18a64bce9 1-635
+"Command files/country-ranking-dashboard/country_ranking_dashboard.html"
+  s_f36243373575de::t_b6706a99e46c64 1-324
+"Command files/country-ranking-dashboard/extract_history.py"
+  s_f36243373575de::t_6d172a3d5dee65 1-173
+"Command files/country-ranking-dashboard/kpi_catalog.json"
+  s_f36243373575de::t_00ee8539ba6237 1-126
+"Command files/country-ranking-dashboard/query_history.json"
+  s_f36243373575de::t_17c6aa0aefdbd1 1-975
+"Command files/country-ranking-dashboard/signals_external.json"
+  s_f36243373575de::t_6bc6895ca13ed1 1-56
+"Command files/dart/DART-v2.md"
+  s_f36243373575de::t_5bd71996800df0 1-119
+"Command files/dart/SKILL.md"
+  s_f36243373575de::t_9e9bf32d5acb47 1-70
+"Command files/dart/config.example.yaml"
+  s_f36243373575de::t_6fbbd86e868382 1-38
+"Command files/dart/engine.md"
+  s_f36243373575de::t_58e80c73afa700 1-552
+"Command files/hackathon-pdts-are-cool/country_ranking_dashboard.html"
+  s_f36243373575de::t_30f9daf2d7a4dc 1-266
+"Command files/hackathon-pdts-are-cool/index.html"
+  s_f36243373575de::t_2f9a44b3bee8b0 1-701
+"Command files/knowledge-transfer/CLAUDE_KNOWLEDGE.md"
+  s_f36243373575de::t_8e1bb84be7fe92 1-351
+"Command files/knowledge-transfer/digests/01_2026-06-09_ed375c43.txt"
+  s_f36243373575de::t_9bc442eda2d521 1-37
+"Command files/knowledge-transfer/digests/02_2026-06-14_339f421f.txt"
+  s_f36243373575de::t_9dd7b85f511acd 1-3
+"Command files/knowledge-transfer/digests/03_2026-06-14_e92d65c6.txt"
+  s_f36243373575de::t_d6afd875866634 1-46
+"Command files/knowledge-transfer/digests/04_2026-06-14_97ac38fd.txt"
+  s_f36243373575de::t_5dafd6176e7f03 1-8
+"Command files/knowledge-transfer/digests/05_2026-06-14_53597e1b.txt"
+  s_f36243373575de::t_9514cfa08b3e33 1-5
+"Command files/knowledge-transfer/digests/06_2026-06-14_10a3f81c.txt"
+  s_f36243373575de::t_d39f2a41904507 1-4
+"Command files/knowledge-transfer/digests/07_2026-06-14_08c16e38.txt"
+  s_f36243373575de::t_1bca2200c43c1b 1-31
+"Command files/knowledge-transfer/digests/08_2026-06-15_2dcb03ce.txt"
+  s_f36243373575de::t_15fdeb8ec335bd 1-47
+"Command files/knowledge-transfer/digests/09_2026-06-16_ffdbd1e7.txt"
+  s_f36243373575de::t_26c43958039830 1-134
+"Command files/knowledge-transfer/digests/10_2026-06-22_ca52c364.txt"
+  s_f36243373575de::t_cd39a0948ecfc6 1-62
+"Command files/knowledge-transfer/digests/11_2026-06-22_4f0bd61e.txt"
+  s_f36243373575de::t_728403c5036a9d 1-12
+"Command files/knowledge-transfer/digests/12_2026-06-23_207de58c.txt"
+  s_f36243373575de::t_8da8e5051693b6 1-10
+"Command files/knowledge-transfer/digests/13_2026-06-24_9e3132d9.txt"
+  s_f36243373575de::t_14dfbeac41c52f 1-11
+"Command files/knowledge-transfer/digests/14_2026-06-24_d1295713.txt"
+  s_f36243373575de::t_e3afcb55fae0cd 1-14
+"Command files/knowledge-transfer/digests/15_2026-06-25_5b21bcb8.txt"
+  s_f36243373575de::t_ca0be26c5ea1f3 1-127
+"Command files/knowledge-transfer/digests/16_2026-06-26_f4da84da.txt"
+  s_f36243373575de::t_a7d33d4476c78a 1-38
+"Command files/knowledge-transfer/digests/17_2026-06-26_142b8a67.txt"
+  s_f36243373575de::t_03785dfca3cf2e 1-3
+"Command files/knowledge-transfer/digests/18_2026-06-26_f39755ab.txt"
+  s_f36243373575de::t_078d02c8bbbe61 1-234
+"Command files/knowledge-transfer/digests/19_2026-06-26_a371bfda.txt"
+  s_f36243373575de::t_2702b015a6c05a 1-84
+"Command files/knowledge-transfer/digests/20_2026-06-26_8363a530.txt"
+  s_f36243373575de::t_348f70bd8ee9d5 1-39
+"Command files/knowledge-transfer/digests/21_2026-06-26_17c4d0ae.txt"
+  s_f36243373575de::t_9490e29a41191b 1-63
+"Command files/knowledge-transfer/digests/22_2026-06-26_287a2ce4.txt"
+  s_f36243373575de::t_696ce7b75157c2 1-2
+"Command files/knowledge-transfer/digests/23_2026-06-26_a5527fd2.txt"
+  s_f36243373575de::t_ff28788ad5b413 1-16
+"Command files/knowledge-transfer/digests/24_2026-06-29_c7997530.txt"
+  s_f36243373575de::t_7c86ad4f046e2e 1-3
+"Command files/knowledge-transfer/digests/25_2026-06-29_f6e1f3d1.txt"
+  s_f36243373575de::t_6b9a96b6c8f703 1-30
+"Command files/knowledge-transfer/digests/26_2026-07-06_7ba41618.txt"
+  s_f36243373575de::t_df6f7b5a2d6fb1 1-38
+"Command files/knowledge-transfer/digests/27_2026-07-06_1634235a.txt"
+  s_f36243373575de::t_403cbb24f6553e 1-5
+"Command files/knowledge-transfer/digests/28_2026-07-06_9d6211de.txt"
+  s_f36243373575de::t_d3691e24bb7b3b 1-13
+"Command files/knowledge-transfer/digests/29_2026-07-06_0cc6f9a2.txt"
+  s_f36243373575de::t_2897769abc8981 1-47
+"Command files/knowledge-transfer/digests/30_2026-07-06_3bdd8544.txt"
+  s_f36243373575de::t_d763c052b8fb45 1-39
+"Command files/knowledge-transfer/digests/31_2026-07-06_95691417.txt"
+  s_f36243373575de::t_375c21c47070a4 1-32
+"Command files/knowledge-transfer/digests/32_2026-07-06_90464c21.txt"
+  s_f36243373575de::t_d384b01d3fca0c 1-88
+"Command files/knowledge-transfer/digests/33_2026-07-06_7f06ddad.txt"
+  s_f36243373575de::t_c663afdfc3afef 1-81
+"Command files/knowledge-transfer/digests/34_2026-07-06_909f92be.txt"
+  s_f36243373575de::t_160a244f185e28 1-9
+"Command files/knowledge-transfer/digests/35_2026-07-06_9237eb32.txt"
+  s_f36243373575de::t_8022d25c2ca4d2 1-5
+"Command files/knowledge-transfer/digests/36_2026-07-06_825f8ed3.txt"
+  s_f36243373575de::t_3fd1d0b128911d 1-5
+"Command files/knowledge-transfer/digests/37_2026-07-06_ce45279a.txt"
+  s_f36243373575de::t_417b6952d0233b 1-2
+"Command files/knowledge-transfer/digests/38_2026-07-06_839de16f.txt"
+  s_f36243373575de::t_a18ca3da453069 1-2
+"Command files/knowledge-transfer/digests/39_2026-07-06_9a30bbb6.txt"
+  s_f36243373575de::t_fcd66c3a1d01c5 1-28
+"Command files/knowledge-transfer/digests/40_2026-07-06_6187fda3.txt"
+  s_f36243373575de::t_a3bfa1655e41c4 1-109
+"Command files/knowledge-transfer/digests/41_2026-07-06_46f11fd1.txt"
+  s_f36243373575de::t_c4445dc15cb4dc 1-41
+"Command files/knowledge-transfer/digests/42_2026-07-06_a360e8e1.txt"
+  s_f36243373575de::t_7e33588a80a8f1 1-79
+"Command files/knowledge-transfer/digests/43_2026-07-07_21896462.txt"
+  s_f36243373575de::t_f58ae9d204126d 1-2
+"Command files/knowledge-transfer/digests/44_2026-07-08_a9de8dee.txt"
+  s_f36243373575de::t_1fe3ad622761af 1-4
+"Command files/knowledge-transfer/digests/45_2026-07-08_a741314d.txt"
+  s_f36243373575de::t_70ce4692becea4 1-64
+"Command files/knowledge-transfer/digests/46_2026-07-09_9263dd9c.txt"
+  s_f36243373575de::t_9cddd861a0be96 1-2
+"Command files/knowledge-transfer/digests/47_2026-07-09_30e19159.txt"
+  s_f36243373575de::t_daa55c819d8fc3 1-15
+"Command files/knowledge-transfer/memory/MEMORY.md"
+  s_f36243373575de::t_4e2bfe2fa6b137 1-41
+"Command files/knowledge-transfer/memory/feedback_folder_creation.md"
+  s_f36243373575de::t_da4c16915000db 1-11
+"Command files/knowledge-transfer/memory/feedback_presentation_format.md"
+  s_f36243373575de::t_572a17f3c0a699 1-14
+"Command files/knowledge-transfer/memory/feedback_slack_table_format.md"
+  s_f36243373575de::t_a7a0f83f395362 1-68
+"Command files/knowledge-transfer/memory/feedback_working_style.md"
+  s_f36243373575de::t_9d52409c8b6df2 1-16
+"Command files/knowledge-transfer/memory/project_ar_darkstores_ept_tests.md"
+  s_f36243373575de::t_b07c50a5396263 1-26
+"Command files/knowledge-transfer/memory/project_biweekly_update.md"
+  s_f36243373575de::t_39d7dba7eae6b1 1-8
+"Command files/knowledge-transfer/memory/project_country_ranking_hackathon.md"
+  s_f36243373575de::t_b4c13c35f3f187 1-10
+"Command files/knowledge-transfer/memory/project_cycle_review.md"
+  s_f36243373575de::t_7e855c49093501 1-12
+"Command files/knowledge-transfer/memory/project_dart_workflow.md"
+  s_f36243373575de::t_00d2c82b6cae61 1-20
+"Command files/knowledge-transfer/memory/project_domain_update_prep.md"
+  s_f36243373575de::t_e8ded49d729c05 1-27
+"Command files/knowledge-transfer/memory/project_dt_analysis.md"
+  s_f36243373575de::t_cd5d181f5d664f 1-16
+"Command files/knowledge-transfer/memory/project_ept_quantile_switchback.md"
+  s_f36243373575de::t_96a3d383103d9a 1-12
+"Command files/knowledge-transfer/memory/project_insights_report.md"
+  s_f36243373575de::t_af7633423303d6 1-27
+"Command files/knowledge-transfer/memory/project_okr_state.md"
+  s_f36243373575de::t_c0d0b9fd9a08d8 1-8
+"Command files/knowledge-transfer/memory/project_pelican_shops.md"
+  s_f36243373575de::t_eeb2b205fc71a5 1-10
+"Command files/knowledge-transfer/memory/project_talabat_jump_experiment.md"
+  s_f36243373575de::t_9c3b1d476d7d09 1-18
+"Command files/knowledge-transfer/memory/reference_adjusted_grocery_flow.md"
+  s_f36243373575de::t_c6f81e9ae6788e 1-29
+"Command files/knowledge-transfer/memory/reference_basequery.md"
+  s_f36243373575de::t_4101d37202f20b 1-88
+"Command files/knowledge-transfer/memory/reference_bigquery_ops.md"
+  s_f36243373575de::t_094a5658ee341a 1-14
+"Command files/knowledge-transfer/memory/reference_cpu_delta_cpu.md"
+  s_f36243373575de::t_7041d48cb0c157 1-8
+"Command files/knowledge-transfer/memory/reference_dart_dt45_qc.md"
+  s_f36243373575de::t_ef86ceafc6a379 1-14
+"Command files/knowledge-transfer/memory/reference_dashboards_hosting.md"
+  s_f36243373575de::t_fbcfd27633cf68 1-12
+"Command files/knowledge-transfer/memory/reference_gws_cli.md"
+  s_f36243373575de::t_78b64859c81860 1-21
+"Command files/knowledge-transfer/memory/reference_litellm_budget.md"
+  s_f36243373575de::t_c4aeaa7fcce0e6 1-8
+"Command files/knowledge-transfer/memory/reference_metric_definitions.md"
+  s_f36243373575de::t_bc8179e637d7ea 1-19
+"Command files/knowledge-transfer/memory/reference_okra_mcp.md"
+  s_f36243373575de::t_5dd6128bb4e89d 1-16
+"Command files/knowledge-transfer/memory/reference_people_channels.md"
+  s_f36243373575de::t_94766eadd7074b 1-12
+"Command files/knowledge-transfer/memory/reference_platform_brand_mapping.md"
+  s_f36243373575de::t_a24decd9085392 1-22
+"Command files/knowledge-transfer/memory/reference_scheduled_query_extraction.md"
+  s_f36243373575de::t_3296b75b732b99 1-18
+"Command files/knowledge-transfer/memory/reference_tapi_order_deepdive.md"
+  s_f36243373575de::t_ce881f1e29ce57 1-66
+"Command files/knowledge-transfer/memory/reference_tracking_api_logs.md"
+  s_f36243373575de::t_1cf5a6190f5a09 1-29
+"Command files/knowledge-transfer/memory/reference_vertical_categories.md"
+  s_f36243373575de::t_c50d7144db6e47 1-17
+analysis_recs.json
+  s_f36243373575de::t_41f7b5ff0d56e7 1
+analyze.py
+  s_f36243373575de::t_485ff4a539e3be 1-76
+build_report.py
+  s_f36243373575de::t_efe05f460a385a 1-66
+country_level_comparison.sql
+  s_f36243373575de::t_35b8e8c6a4987c 1-71
+detail.py
+  s_f36243373575de::t_f28894b879b9ca 1-30
+download.txt
+  s_f36243373575de::t_58d0db336a7805 1-119
+final_report.md
+  s_f36243373575de::t_342b47961ea127 1-63
+jump_station_3arm.sql
+  s_f36243373575de::t_22a7a591f472ad 1-198
+okr_w21_summary.md
+  s_f36243373575de::t_4b22ed03a2962a 1-75
+pelican_country.sql
+  s_f36243373575de::t_9748b28c1bd2cd 1-497
+pelican_dashboard.sql
+  s_f36243373575de::t_3a772622a58d38 1-535
+pelican_dashboard_cheap.sql
+  s_f36243373575de::t_1ad92b84f92567 1-535
+pelican_significance.py
+  s_f36243373575de::t_c0f4a617d652e9 1-221
+pelican_stats_ready.sql
+  s_f36243373575de::t_18f51b1454a9f6 1-526
+pitch_user_segmentation.txt
+  s_f36243373575de::t_7210dac10e7baf 1-36
+populate_doc.py
+  s_f36243373575de::t_928937bbd28756 1-138
+q3_experiments_by_brand.html
+  s_f36243373575de::t_8f7ea81702aadc 1-540
+q3_experiments_calendar.html
+  s_f36243373575de::t_feb4927f375920 1-440
+q3_experiments_pipeline.html
+  s_f36243373575de::t_faf95a7479f7bd 1-480
+scripts/run-seamless-analysis.sh
+  s_f36243373575de::t_cfd9be3c9016ff 1-116
+seamless-mbr/seamless-mbr-w28.html
+  s_f36243373575de::t_c2442730968823 1-491
+seamless-reports/.quarantine/report-2026W27.MBR-suspect.md
+  s_f36243373575de::t_0c8c5140596423 1-52
+seamless-reports/.state/sent-2026W27.ok
+  s_f36243373575de::t_383028697cad03 1
+seamless-reports/report-2026W21.md
+  s_f36243373575de::t_900294d885e607 1-28
+seamless-reports/report-2026W22-dryrun-v2.md
+  s_f36243373575de::t_a3d496f5dddbdf 1-43
+seamless-reports/report-2026W22-dryrun-v3.md
+  s_f36243373575de::t_d4d6043b6142cc 1-43
+seamless-reports/report-2026W22-dryrun.md
+  s_f36243373575de::t_1c758dc1a90f36 1-33
+seamless-reports/report-2026W22.md
+  s_f36243373575de::t_1335ae52bc5eae 1-43
+seamless-reports/report-2026W23.md
+  s_f36243373575de::t_c23f6c63b88147 1-43
+seamless-reports/report-2026W24.md
+  s_f36243373575de::t_8fdcb3cacc7e6c 1-43
+seamless-reports/report-2026W25.md
+  s_f36243373575de::t_fafc5efc633337 1-43
+seamless-reports/report-2026W26.md
+  s_f36243373575de::t_a9f586f421e310 1-50
+seamless-reports/report-2026W27.md
+  s_f36243373575de::t_8ac50bc585ba0a 1-48
+seamless-reports/report-2026W28.md
+  s_f36243373575de::t_085d759fc5a1c6 1-49
+talabat_jump_build.py
+  s_f36243373575de::t_f074893b573345 1-293
+talabat_jump_dashboard.html
+  s_f36243373575de::t_fe0cd6b6c5d686 1-217
+talabat_jump_dashboard.md
+  s_f36243373575de::t_deb353d07250d2 1-76
+talabat_jump_deploy.sh
+  s_f36243373575de::t_6c805a28145e3f 1-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "59370058a21763790bb81263e83cf7124557a53b",
+  "prompts": {},
+  "sessions": {
+    "s_2d193756014623": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "971cf40e-c121-4e7d-92f8-dfecab5d7aa1",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Harnoor Chahal <harnoor.chahal@deliveryhero.com>"
+    },
+    "s_3b013565e0e1c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "252c93ea-3810-4b56-b889-2902e0b784c3",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Harnoor Chahal <harnoor.chahal@deliveryhero.com>"
+    },
+    "s_6a9758be0687e9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d9f85107-58a8-4508-8c77-bda34ebc4ebd",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Harnoor Chahal <harnoor.chahal@deliveryhero.com>"
+    },
+    "s_f36243373575de": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89d7c910-ce43-4c6d-8098-78a97f268cfe",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "human_author": "Harnoor Chahal <harnoor.chahal@deliveryhero.com>"
+    }
+  }
+}
