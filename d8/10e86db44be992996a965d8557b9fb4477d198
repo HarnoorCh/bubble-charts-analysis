@@ -1,0 +1,19 @@
+.gitignore
+  s_e14658d7535535::t_e3d28c58e211ed 6-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "d810e86db44be992996a965d8557b9fb4477d198",
+  "prompts": {},
+  "sessions": {
+    "s_e14658d7535535": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "408ada75-a75f-4b65-ac88-0b11cff4c3a8",
+        "model": "claude-haiku-4-5-20251001"
+      },
+      "human_author": "Harnoor Chahal <harnoor.chahal@deliveryhero.com>"
+    }
+  }
+}
