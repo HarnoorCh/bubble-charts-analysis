@@ -14,3 +14,8 @@ seamless-claude-onboarding/
 qc-range-targets-handover/
 preptime-alert/
 seamless-reports/.state/
+labops-revamp/
+labops-tasks-*.md
+preptime_gap_*.html
+qc-range-targets-handover.*
+scripts/run-*.sh
