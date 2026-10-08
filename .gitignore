@@ -3,3 +3,14 @@
 *.log
 *.err
 *.out
+labops/
+okra/
+reports/
+dart-seamless/
+Command files/
+how-i-work-with-claude/
+seamless-claude-onboarding/
+*.pdf
+qc-range-targets-handover/
+preptime-alert/
+seamless-reports/.state/
